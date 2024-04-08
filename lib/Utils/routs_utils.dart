@@ -6,6 +6,7 @@ import 'package:untitled1/Views/Splash/splash_screen.dart';
 class NameRouts{
   static const String splash = '/splash';
   static const String setRout = '/setRout';
+  static const String homeMap = '/homeMap';
 }
 
 class PageRout {
