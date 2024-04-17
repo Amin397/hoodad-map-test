@@ -2,6 +2,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
+import 'package:untitled1/Consts/colors.dart';
 import 'package:untitled1/Consts/measures.dart';
 
 Widget myTextField({
@@ -33,7 +34,7 @@ Widget myTextField({
     margin: margin,
     padding: padding,
     child: TextField(
-      inputFormatters: textMask??[],
+      inputFormatters: textMask ?? [],
       obscureText: obscureText,
       controller: controller,
       style: textStyle,
@@ -50,29 +51,31 @@ Widget myTextField({
       decoration: InputDecoration(
         counter: const SizedBox(),
         border: const OutlineInputBorder(),
-        label: Text(hint),
-        labelStyle: const TextStyle(
+        labelStyle:  TextStyle(
           fontSize: 16.0,
-          color: Colors.grey,
+          color: Colors.grey.withOpacity(.4),
         ),
         // hintText: hint,
-        hintStyle: const TextStyle(
+        hintStyle:  TextStyle(
           fontSize: 16.0,
-          color: Colors.grey,
+          color: Colors.grey.withOpacity(.4),
         ),
-        enabledBorder: const OutlineInputBorder(
+        enabledBorder: OutlineInputBorder(
+          borderRadius: radiusAll12,
           borderSide: BorderSide(
             width: 2.0,
-            color: Colors.blue,
+            color: Colors.grey.withOpacity(.4),
           ),
         ),
-        focusedBorder: const OutlineInputBorder(
+        focusedBorder: OutlineInputBorder(
+          borderRadius: radiusAll12,
           borderSide: BorderSide(
             width: 2.0,
-            color: Colors.blue,
+            color: mainColor,
           ),
         ),
-        disabledBorder: const OutlineInputBorder(
+        disabledBorder: OutlineInputBorder(
+          borderRadius: radiusAll12,
           borderSide: BorderSide(
             width: 2.0,
             color: Colors.blue,
@@ -80,12 +83,11 @@ Widget myTextField({
         ),
         enabled: enable,
         suffixIcon: suffix,
-        prefix: prefix,
+        prefixIcon: prefix,
       ),
     ),
   );
 }
-
 
 void showLoadingAlert() {
   RxBool isCanCancel = false.obs;
@@ -105,7 +107,7 @@ void showLoadingAlert() {
         backgroundColor: Colors.transparent,
         contentPadding: EdgeInsets.zero,
         content: Obx(
-              () => LoadingAlertWidget(
+          () => LoadingAlertWidget(
             isCanCancel: isCanCancel.value,
           ),
         ),
@@ -115,8 +117,6 @@ void showLoadingAlert() {
     cancelTimer.cancel();
   });
 }
-
-
 
 Widget LoadingAlertWidget({
   required bool isCanCancel,
@@ -150,27 +150,27 @@ Widget LoadingAlertWidget({
           ),
           (isCanCancel)
               ? InkWell(
-            onTap: () {
-              Get.back();
-            },
-            child: Container(
-              width: Get.width * .4,
-              height: Get.height * .05,
-              decoration: BoxDecoration(
-                color: Colors.red.shade700,
-                borderRadius: radiusAll12,
-              ),
-              child: const Center(
-                child: Text(
-                  'Cancel',
-                  maxLines: 1,
-                  style: TextStyle(
-                    color: Colors.white,
+                  onTap: () {
+                    Get.back();
+                  },
+                  child: Container(
+                    width: Get.width * .4,
+                    height: Get.height * .05,
+                    decoration: BoxDecoration(
+                      color: Colors.red.shade700,
+                      borderRadius: radiusAll12,
+                    ),
+                    child: const Center(
+                      child: Text(
+                        'Cancel',
+                        maxLines: 1,
+                        style: TextStyle(
+                          color: Colors.white,
+                        ),
+                      ),
+                    ),
                   ),
-                ),
-              ),
-            ),
-          )
+                )
               : const SizedBox(),
         ],
       ),

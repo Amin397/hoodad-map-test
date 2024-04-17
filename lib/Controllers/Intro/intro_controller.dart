@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 import 'package:untitled1/Models/Intro/intro_model.dart';
+import 'package:untitled1/Utils/routs_utils.dart';
 
 class IntroController extends GetxController {
   RxInt currentIndex = 0.obs;
@@ -42,5 +43,9 @@ class IntroController extends GetxController {
 
   void changePage({required int page}) {
     currentIndex(page);
+  }
+
+  void goToLogin() {
+    Get.offAllNamed(NameRouts.login);
   }
 }
