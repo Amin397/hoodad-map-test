@@ -1,5 +1,4 @@
 import 'dart:async';
-
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
@@ -129,17 +128,17 @@ Widget LoadingAlertWidget({
     child: Container(
       width: Get.width,
       height: Get.height * .4,
-      decoration: BoxDecoration(
+      decoration: const BoxDecoration(
         color: Colors.transparent,
       ),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          CircularProgressIndicator(),
+          const CircularProgressIndicator(),
           SizedBox(
             height: Get.height * .01,
           ),
-          Text(
+          const Text(
             'Loading...',
             style: TextStyle(
               color: Colors.white,
@@ -161,7 +160,7 @@ Widget LoadingAlertWidget({
                 color: Colors.red.shade700,
                 borderRadius: radiusAll12,
               ),
-              child: Center(
+              child: const Center(
                 child: Text(
                   'Cancel',
                   maxLines: 1,
@@ -172,7 +171,7 @@ Widget LoadingAlertWidget({
               ),
             ),
           )
-              : SizedBox(),
+              : const SizedBox(),
         ],
       ),
     ),
