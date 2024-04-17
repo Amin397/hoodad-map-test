@@ -15,6 +15,7 @@ void main()async{
       // home: SplashScreen(),
       title: 'Test Map',
       theme: ThemeData(
+        fontFamily: 'Yekan',
         textTheme: const TextTheme(
           titleMedium: TextStyle(
             color: Colors.black,
