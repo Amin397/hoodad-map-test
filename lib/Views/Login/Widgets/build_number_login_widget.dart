@@ -6,6 +6,7 @@ import 'package:untitled1/Consts/colors.dart';
 import 'package:untitled1/Consts/measures.dart';
 import 'package:untitled1/Controllers/Login/login_controller.dart';
 import 'package:untitled1/Utils/view_utils.dart';
+import 'package:untitled1/Utils/widget_utils.dart';
 
 class BuildNumberLoginWidget extends StatelessWidget {
   BuildNumberLoginWidget({super.key, required this.controller});
@@ -21,43 +22,53 @@ class BuildNumberLoginWidget extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.end,
         children: [
-          Text(
-            'ورود به اپلیکیشن تال‌بان',
-            style: TextStyle(fontWeight: FontWeight.bold, fontSize: 22.0),
+          animationConfig(
+            widget: Text(
+              'ورود به اپلیکیشن تال‌بان',
+              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 22.0),
+            ),
+            index: 1,
           ),
-          Text(
-            '. برای ورود شماره موبایل خود را وارد کنید',
-            style: TextStyle(fontSize: 18.0, color: Colors.black45),
+          animationConfig(
+            widget: Text(
+              '. برای ورود شماره موبایل خود را وارد کنید',
+              style: TextStyle(fontSize: 18.0, color: Colors.black45),
+            ),
+            index: 1,
           ),
           SizedBox(
             height: Get.height * .07,
           ),
-          Text(
-            'شماره موبایل',
-            style: TextStyle(fontWeight: FontWeight.bold, fontSize: 22.0),
+          animationConfig(
+            widget: Text(
+              'شماره موبایل',
+              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 22.0),
+            ),
+            index: 2,
           ),
           SizedBox(
             height: Get.height * .01,
           ),
-          myTextField(
-            width: Get.width,
-            height: Get.height * .07,
-            hint: 'شماره موبایل خود را وارد کنید',
-            controller: controller.phoneNumberTextController,
-            textStyle: TextStyle(
-              fontSize: 22.0,
+          animationConfig(
+            widget: myTextField(
+              width: Get.width,
+              height: Get.height * .07,
+              hint: 'شماره موبایل خود را وارد کنید',
+              controller: controller.phoneNumberTextController,
+              textStyle: TextStyle(
+                fontSize: 22.0,
+              ),
+              textAlign: TextAlign.center,
+              inputType: TextInputType.number,
+              enable: true,
+              maxLine: 1,
+              maxLength: 11,
+              suffix: Icon(
+                Icons.phone_android_outlined,
+                color: Colors.grey,
+              ),
             ),
-            textAlign: TextAlign.center,
-            autoFocus: true,
-            inputType: TextInputType.number,
-            enable: true,
-            maxLine: 1,
-
-            maxLength: 11,
-            suffix: Icon(
-              Icons.phone_android_outlined,
-              color: Colors.grey,
-            ),
+            index: 2,
           ),
           Expanded(
             child: SizedBox(
@@ -66,28 +77,31 @@ class BuildNumberLoginWidget extends StatelessWidget {
               child: Align(
                 alignment: Alignment.bottomCenter,
                 child: InkWell(
-                  onTap: (){
+                  onTap: () {
                     controller.changeLoginStatus();
                   },
-                  child: Container(
-                    height: Get.height * .06,
-                    width: Get.width,
-                    decoration: BoxDecoration(
-                      boxShadow: shadow(),
-                      color: deepMainColor,
-                      borderRadius: radiusAll16,
-                    ),
-                    child: Center(
-                      child: AutoSizeText(
-                        'دریافت کد تایید',
-                        maxFontSize: 24.0,
-                        minFontSize: 20.0,
-                        maxLines: 1,
-                        style: TextStyle(
-                          color: Colors.black,
+                  child: animationConfig(
+                    widget: Container(
+                      height: Get.height * .06,
+                      width: Get.width,
+                      decoration: BoxDecoration(
+                        boxShadow: shadow(),
+                        color: deepMainColor,
+                        borderRadius: radiusAll16,
+                      ),
+                      child: Center(
+                        child: AutoSizeText(
+                          'دریافت کد تایید',
+                          maxFontSize: 24.0,
+                          minFontSize: 20.0,
+                          maxLines: 1,
+                          style: TextStyle(
+                            color: Colors.black,
+                          ),
                         ),
                       ),
                     ),
+                    index: 3,
                   ),
                 ),
               ),
