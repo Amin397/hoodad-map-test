@@ -49,7 +49,7 @@ class SplashController extends GetxController {
     });
 
 
-    Future.delayed(const Duration(seconds: 4) , (){
+    Future.delayed(const Duration(seconds: 7) , (){
       Get.offAllNamed(NameRouts.intro);
     });
 
