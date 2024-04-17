@@ -187,22 +187,27 @@ class IntroScreen extends StatelessWidget {
   Widget _buildAcceptButton() {
     return Align(
       alignment: Alignment.bottomCenter,
-      child: Container(
-        height: Get.height * .07,
-        width: Get.width,
-        margin: paddingAll18,
-        decoration: BoxDecoration(
-          color: Colors.white,
-          borderRadius: radiusAll12,
-          boxShadow: shadow(),
-        ),
-        child: Center(
-          child: AutoSizeText(
-            'ورود',
-            maxLines: 1,
-            maxFontSize: 24.0,
-            minFontSize: 20.0,
-            style: TextStyle(color: Colors.black),
+      child: GestureDetector(
+        onTap: (){
+          controller.goToLogin();
+        },
+        child: Container(
+          height: Get.height * .07,
+          width: Get.width,
+          margin: paddingAll18,
+          decoration: BoxDecoration(
+            color: Colors.white,
+            borderRadius: radiusAll12,
+            boxShadow: shadow(),
+          ),
+          child: Center(
+            child: AutoSizeText(
+              'ورود',
+              maxLines: 1,
+              maxFontSize: 24.0,
+              minFontSize: 20.0,
+              style: TextStyle(color: Colors.black),
+            ),
           ),
         ),
       ),
