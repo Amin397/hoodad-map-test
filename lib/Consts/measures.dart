@@ -33,6 +33,9 @@ const EdgeInsets paddingSymmetricV2 = EdgeInsets.symmetric(vertical: 2.0);
 const EdgeInsets paddingSymmetricV16 = EdgeInsets.symmetric(vertical: 16.0);
 const EdgeInsets paddingSymmetricV20 = EdgeInsets.symmetric(vertical: 20.0);
 const EdgeInsets paddingSymmetricV24 = EdgeInsets.symmetric(vertical: 24.0);
+const EdgeInsets paddingSymmetricV28 = EdgeInsets.symmetric(vertical: 28.0);
+const EdgeInsets paddingSymmetricV36 = EdgeInsets.symmetric(vertical: 36.0);
+const EdgeInsets paddingSymmetricV42 = EdgeInsets.symmetric(vertical: 42.0);
 
 final BorderRadius radiusAll4 = BorderRadius.circular(4.0);
 final BorderRadius radiusAll6 = BorderRadius.circular(6.0);
@@ -90,4 +93,3 @@ List<BoxShadow> itermShadow({
 
 var persian = RegExp(r'[\u0600-\u06FF]');
 var english = RegExp(r'[a-zA-Z]');
-

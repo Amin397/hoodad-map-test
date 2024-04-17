@@ -1,11 +1,13 @@
 import 'dart:convert';
+import 'dart:math';
 
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:geolocator/geolocator.dart';
 import 'package:get/get.dart';
-import 'package:untitled1/Utils/routs_utils.dart';
-import 'package:geocoding/geocoding.dart';
+import 'package:permission_handler/permission_handler.dart';
+import 'package:units_converter/units_converter.dart';
 import 'package:latlong2/latlong.dart';
+import 'package:geocoding/geocoding.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:http/http.dart' as http;
 import 'package:untitled1/Utils/view_utils.dart';
@@ -17,6 +19,7 @@ class SetRoutController extends GetxController {
   List<Location> originLocation = [];
   List<Location> destinationLocation = [];
   List<LatLng> routPoints = [];
+  List<Marker> markerList = [];
 
   Marker? originMarker;
   Marker? destinationMarker;
@@ -27,40 +30,70 @@ class SetRoutController extends GetxController {
   LatLng? originPoint;
   LatLng? destinationPoint;
 
+  double markerRandomLat = 35.80723;
+  double markerRandomLng = 51.42881;
+  dynamic distanceInMeters = 0.0;
+  String showDistance = '';
+
   late LatLng originLatLng;
   late LatLng destinationLatLng;
 
   RxBool isVisible = false.obs;
 
-  void goToMap() async {
-    originLocation.clear();
-    destinationLocation.clear();
-    isVisible(false);
+  Marker? currentLocation;
 
-    // originLocation = await locationFromAddress(originTextController.text);
-    // destinationLocation =
-    //     await locationFromAddress(destinationTextController.text);
+  @override
+  void onInit() {
+    updateLocation();
+    super.onInit();
+  }
 
-    // originLatLng =
-    //     LatLng(originLocation.first.latitude, originLocation.first.longitude);
-    // destinationLatLng = LatLng(destinationLocation.first.latitude,
-    //     destinationLocation.first.longitude);
+  Future<void> updateLocation() async {
+    if (await Permission.location.status.isGranted) {
+      _getCurrentLocation();
 
-    await makeRoutRequest();
+    } else {
+      await Permission.location.request();
+      updateLocation();
+    }
+    // if (LocationPermission.whileInUse == LocationPermission.denied) {
+    //   print('sdasdasd');
+    // }
+  }
+
+  _getCurrentLocation() {
+    Geolocator.getCurrentPosition(
+            desiredAccuracy: LocationAccuracy.best,
+            forceAndroidLocationManager: true)
+        .then((Position position) {
+      currentLocation = Marker(
+        point: LatLng(
+          position.latitude,
+          position.longitude,
+        ),
+        child: const Icon(
+          Icons.my_location_outlined,
+          color: Colors.red,
+        ),
+        alignment: Alignment.topCenter
+      );
+
+      mapController.moveAndRotate(currentLocation!.point, 17, 3.0);
+      Future.delayed(const Duration(milliseconds: 500) , (){
+        update(['routPoints']);
+      });
+
+    }).catchError((e) {
+      print(e);
+    });
   }
 
   Future<void> makeRoutRequest() async {
-
     showLoadingAlert();
     Uri url = Uri.parse(
         // 'http://router.project-osrm.org/route/v1/driving/${originLatLng.longitude},${originLatLng.latitude};${destinationLatLng.longitude},${destinationLatLng.latitude}?steps=true&annotations=true&geometries=geojson&overview=full');
         'http://router.project-osrm.org/route/v1/driving/${originPoint!.longitude},${originPoint!.latitude};${destinationPoint!.longitude},${destinationPoint!.latitude}?steps=true&annotations=true&geometries=geojson');
-
     http.Response response = await http.get(url);
-
-    // print(response.body);
-    print('\n\n ============== \n\n');
-
     routPoints = [];
 
     List router =
@@ -70,21 +103,12 @@ class SetRoutController extends GetxController {
 
     amin = amin.replaceAll(']', '').replaceAll('[', '').replaceAll(' ', '');
 
-    print(amin.split(','));
-
-    // Tajrish, Iran
-
-    //Tehran Province, Tajrish, Yekta, RC4C+HJH, Iran
-
-    //
     for (var o in router) {
       String reep = o.toString();
       reep = reep.replaceAll(']', '').replaceAll('[', '').replaceAll(' ', '');
 
       var lat1 = reep.split(',');
       var lng1 = reep.split(",");
-
-      print('$lat1/$lng1');
 
       routPoints.add(
         LatLng(
@@ -95,14 +119,14 @@ class SetRoutController extends GetxController {
     }
     isVisible(true);
     Get.back();
+    distanceInMeters = 0.0;
+    calDistance();
     Future.delayed(const Duration(seconds: 1), () {
       update(['routPoints']);
     });
-    // arrowline
   }
 
   void addMarkerToMap({required LatLng pressedPoint}) async {
-
     if (isOrigin) {
       routPoints.clear();
       destinationMarker = null;
@@ -115,7 +139,6 @@ class SetRoutController extends GetxController {
           semanticLabel: 'مبدا',
         ),
         alignment: Alignment.topCenter,
-
       );
       originPoint = pressedPoint;
       isOrigin = false;
@@ -135,8 +158,76 @@ class SetRoutController extends GetxController {
       await makeRoutRequest();
     }
 
+    update(['routPoints']);
+  }
 
+  void addRandomMarker() {
+    double randomLat;
+    double randomLng;
+
+    randomLat = markerRandomLat + (Random().nextInt(1000).toDouble() / 100000);
+    randomLng = markerRandomLng + (Random().nextInt(1000).toDouble() / 100000);
+
+    print(randomLng);
+    print(randomLat);
+
+    markerList.insert(
+      0,
+      Marker(
+        point: LatLng(randomLat, randomLng),
+        height: 30.0,
+        width: 30.0,
+        child: Container(
+          height: 30.0,
+          width: 30.0,
+          decoration:
+              const BoxDecoration(shape: BoxShape.circle, color: Colors.green),
+        ),
+      ),
+    );
 
     update(['routPoints']);
+  }
+
+  void calDistance()async {
+
+    int meters;
+
+    print(routPoints.length);
+
+    for(int i = 0; i <= routPoints.length ; i++){
+
+      print(i);
+      if(i < routPoints.length - 1){
+        distanceInMeters = distanceInMeters + Geolocator.distanceBetween(
+          routPoints[i].latitude,
+          routPoints[i].longitude,
+          routPoints[i + 1].latitude,
+          routPoints[i + 1].longitude,
+        );
+      }
+    }
+
+
+
+    meters = distanceInMeters!.toInt();
+
+    if(distanceInMeters!.toInt() > 1000){
+      distanceInMeters = double.parse((distanceInMeters / 1000).toStringAsFixed(2));
+    }else{
+      distanceInMeters = distanceInMeters.toInt();
+    }
+
+
+    if(meters> 1000){
+      showDistance = 'KM';
+    }else{
+      showDistance = 'M';
+    }
+
+
+    print(distanceInMeters);
+    update(['routPoints']);
+
   }
 }
