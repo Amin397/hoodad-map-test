@@ -1,5 +1,4 @@
 import 'package:auto_size_text/auto_size_text.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:untitled1/Consts/colors.dart';
@@ -54,7 +53,7 @@ class BuildNumberLoginWidget extends StatelessWidget {
               width: Get.width,
               height: Get.height * .07,
               hint: 'شماره موبایل خود را وارد کنید',
-              controller: controller.phoneNumberTextController,
+              controller: controller.phoneNumberTextController!,
               textStyle: TextStyle(
                 fontSize: 22.0,
               ),
@@ -78,7 +77,7 @@ class BuildNumberLoginWidget extends StatelessWidget {
                 alignment: Alignment.bottomCenter,
                 child: InkWell(
                   onTap: () {
-                    controller.changeLoginStatus();
+                    controller.sendOtpCode();
                   },
                   child: animationConfig(
                     widget: Container(
