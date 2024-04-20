@@ -1,7 +1,9 @@
 import 'dart:async';
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
+import 'package:lottie/lottie.dart';
 import 'package:untitled1/Consts/colors.dart';
 import 'package:untitled1/Consts/measures.dart';
 
@@ -51,12 +53,12 @@ Widget myTextField({
       decoration: InputDecoration(
         counter: const SizedBox(),
         border: const OutlineInputBorder(),
-        labelStyle:  TextStyle(
+        labelStyle: TextStyle(
           fontSize: 16.0,
           color: Colors.grey.withOpacity(.4),
         ),
         // hintText: hint,
-        hintStyle:  TextStyle(
+        hintStyle: TextStyle(
           fontSize: 16.0,
           color: Colors.grey.withOpacity(.4),
         ),
@@ -89,6 +91,95 @@ Widget myTextField({
   );
 }
 
+Widget LoadingAlertWidget({
+  required bool isCanCancel,
+}) {
+  return WillPopScope(
+    onWillPop: () async {
+      return false;
+    },
+    child: Container(
+      width: Get.width,
+      height: Get.height * .4,
+      decoration: BoxDecoration(
+        color: Colors.transparent,
+      ),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Lottie.asset(
+            'assets/anims/loading.json',
+          ),
+          SizedBox(
+            height: Get.height * .01,
+          ),
+          Text(
+            'Loading...',
+            style: TextStyle(
+              color: Colors.white,
+              fontSize: 16.0,
+            ),
+          ),
+          SizedBox(
+            height: Get.height * .03,
+          ),
+          (isCanCancel)
+              ? InkWell(
+                  onTap: () {
+                    Get.back();
+                  },
+                  child: Container(
+                    width: Get.width * .4,
+                    height: Get.height * .05,
+                    decoration: BoxDecoration(
+                      color: Colors.red.shade700,
+                      borderRadius: radiusAll12,
+                    ),
+                    child: Center(
+                      child: AutoSizeText(
+                        'Cancel',
+                        maxLines: 1,
+                        maxFontSize: 20.0,
+                        minFontSize: 14.0,
+                        style: TextStyle(
+                          color: Colors.white,
+                        ),
+                      ),
+                    ),
+                  ),
+                )
+              : SizedBox(),
+        ],
+      ),
+    ),
+  );
+}
+
+void showSuccessSnakeBar({
+  required String body,
+}) async {
+  Get.snackbar(
+    'Yesss :)',
+    body,
+    forwardAnimationCurve: Curves.fastLinearToSlowEaseIn,
+    backgroundColor: Colors.green.withOpacity(.5),
+    snackPosition: SnackPosition.TOP,
+    margin: paddingAll6,
+    colorText: Colors.black,
+    animationDuration: const Duration(milliseconds: 800),
+    duration: const Duration(seconds: 4),
+    icon: Lottie.asset(
+      'assets/anims/success.json',
+    ),
+    leftBarIndicatorColor: Colors.green.shade800,
+    barBlur: 3.0,
+    borderRadius: 10.0,
+    isDismissible: true,
+    // borderWidth: 1.5,
+    // borderColor: Colors.green,
+  );
+}
+
 void showLoadingAlert() {
   RxBool isCanCancel = false.obs;
 
@@ -116,64 +207,4 @@ void showLoadingAlert() {
   ).then((value) {
     cancelTimer.cancel();
   });
-}
-
-Widget LoadingAlertWidget({
-  required bool isCanCancel,
-}) {
-  return WillPopScope(
-    onWillPop: () async {
-      return false;
-    },
-    child: Container(
-      width: Get.width,
-      height: Get.height * .4,
-      decoration: const BoxDecoration(
-        color: Colors.transparent,
-      ),
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          const CircularProgressIndicator(),
-          SizedBox(
-            height: Get.height * .01,
-          ),
-          const Text(
-            'Loading...',
-            style: TextStyle(
-              color: Colors.white,
-              fontSize: 16.0,
-            ),
-          ),
-          SizedBox(
-            height: Get.height * .03,
-          ),
-          (isCanCancel)
-              ? InkWell(
-                  onTap: () {
-                    Get.back();
-                  },
-                  child: Container(
-                    width: Get.width * .4,
-                    height: Get.height * .05,
-                    decoration: BoxDecoration(
-                      color: Colors.red.shade700,
-                      borderRadius: radiusAll12,
-                    ),
-                    child: const Center(
-                      child: Text(
-                        'Cancel',
-                        maxLines: 1,
-                        style: TextStyle(
-                          color: Colors.white,
-                        ),
-                      ),
-                    ),
-                  ),
-                )
-              : const SizedBox(),
-        ],
-      ),
-    ),
-  );
 }

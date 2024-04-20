@@ -5,6 +5,7 @@ import 'package:get/get.dart';
 import 'package:get/get_rx/get_rx.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
+import 'package:untitled1/Utils/routs_utils.dart';
 
 class LoginController extends GetxController {
   bool isNumberEntered = false;
@@ -13,8 +14,7 @@ class LoginController extends GetxController {
 
   Timer? timeToResend;
 
-
-  RxInt secondsRemaining  = 90.obs;
+  RxInt secondsRemaining = 90.obs;
 
   TextEditingController? phoneNumberTextController;
   TextEditingController? pinCodeTextController;
@@ -27,15 +27,13 @@ class LoginController extends GetxController {
     pinCodeTextController = TextEditingController();
     // errorController = StreamController<ErrorAnimationType>();
 
-
-
     super.onInit();
   }
 
-
   void startTimer() {
     secondsRemaining(90);
-    timeToResend = new Timer.periodic(const Duration(seconds: 1), (Timer timer) {
+    timeToResend =
+        new Timer.periodic(const Duration(seconds: 1), (Timer timer) {
       if (secondsRemaining < 1) {
         timer.cancel();
       } else {
@@ -45,14 +43,11 @@ class LoginController extends GetxController {
     });
   }
 
-
-
   String get timerText {
     int minutes = secondsRemaining ~/ 60;
     num seconds = secondsRemaining % 60;
     return '${minutes.toString().padLeft(2, '0')}:${seconds.toString().padLeft(2, '0')}';
   }
-
 
   sendOtpCode() {
     FocusManager.instance.primaryFocus?.unfocus();
@@ -85,5 +80,12 @@ class LoginController extends GetxController {
       isNumberEntered = false;
       update(['loginSwitcher']);
     });
+  }
+
+  void goToHome() {
+    FocusManager.instance.primaryFocus?.unfocus();
+    Get.offAllNamed(
+      NameRouts.home,
+    );
   }
 }
