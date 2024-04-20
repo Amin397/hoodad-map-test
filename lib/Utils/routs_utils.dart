@@ -1,4 +1,5 @@
 import 'package:get/get.dart';
+import 'package:untitled1/Views/Home/home_screen.dart';
 import 'package:untitled1/Views/Intro/intro_screen.dart';
 import 'package:untitled1/Views/Login/login_screen.dart';
 import 'package:untitled1/Views/SetRout/set_rout_screen.dart';
@@ -10,7 +11,7 @@ class NameRouts{
   static const String intro = '/intro';
   static const String login = '/login';
   static const String setRout = '/setRout';
-  static const String homeMap = '/homeMap';
+  static const String home = '/home';
 }
 
 class PageRout {
@@ -36,6 +37,12 @@ class PageRout {
     GetPage(
         name: NameRouts.login,
         page: () => LoginScreen(),
+        transition: Transition.topLevel,
+        transitionDuration: const Duration(milliseconds: 500)
+    ),
+    GetPage(
+        name: NameRouts.home,
+        page: () => HomeScreen(),
         transition: Transition.topLevel,
         transitionDuration: const Duration(milliseconds: 500)
     ),

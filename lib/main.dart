@@ -11,7 +11,7 @@ void main()async{
     GetMaterialApp(
       debugShowCheckedModeBanner: false,
       getPages: PageRout.pages,
-      initialRoute: NameRouts.login,
+      initialRoute: NameRouts.home,
       // home: SplashScreen(),
       title: 'TaalBaan',
       theme: ThemeData(

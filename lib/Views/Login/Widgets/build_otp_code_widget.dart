@@ -111,7 +111,9 @@ class BuildOtpCodeWidget extends StatelessWidget {
                     height: Get.height * .02,
                   ),
                   InkWell(
-                    onTap: () {},
+                    onTap: () {
+                      controller.goToHome();
+                    },
                     child: animationConfig(
                       widget: Container(
                         height: Get.height * .06,
