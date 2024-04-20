@@ -11,9 +11,9 @@ void main()async{
     GetMaterialApp(
       debugShowCheckedModeBanner: false,
       getPages: PageRout.pages,
-      initialRoute: NameRouts.splash,
+      initialRoute: NameRouts.login,
       // home: SplashScreen(),
-      title: 'Test Map',
+      title: 'TaalBaan',
       theme: ThemeData(
         fontFamily: 'Yekan',
         textTheme: const TextTheme(
