@@ -6,6 +6,7 @@ import 'package:get/get.dart';
 import 'package:latlong2/latlong.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:untitled1/Models/Home/task_model.dart';
+import 'package:untitled1/Utils/routs_utils.dart';
 
 class HomeController extends GetxController {
   List<Location> originLocation = [];
@@ -95,5 +96,9 @@ class HomeController extends GetxController {
     Future.delayed(const Duration(milliseconds: 500) , (){
       isFilterOn(false);
     });
+  }
+
+  void goToSearch() async{
+    Get.toNamed(NameRouts.search);
   }
 }
