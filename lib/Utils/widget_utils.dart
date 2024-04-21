@@ -22,6 +22,7 @@ Widget animationConfig({
 Widget buildAppBar({
   required VoidCallback function,
   required String title,
+  required bool isInnerPage,
 }) {
   return Container(
     width: Get.width,
@@ -53,7 +54,7 @@ Widget buildAppBar({
         IconButton(
           onPressed: function,
           icon: Icon(
-            Icons.clear,
+            (isInnerPage)?Icons.arrow_forward_ios:Icons.clear,
             color: titleTextColor,
           ),
         ),

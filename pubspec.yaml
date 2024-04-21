@@ -95,6 +95,7 @@ flutter:
     - assets/images/Intro/
     - assets/images/Icons/
     - assets/images/MenuIcons/
+    - assets/images/ProfileIcons/
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see

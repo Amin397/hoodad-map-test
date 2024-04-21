@@ -27,5 +27,14 @@ String settingIcon = 'assets/images/MenuIcons/settingIcon.svg';
 
 
 
+//profileIcon
+
+
+String avatarLogo = 'assets/images/ProfileIcons/avatar.jpg';
+String cameraIcon = 'assets/images/ProfileIcons/cameraIcon.svg';
+String chatIcon = 'assets/images/ProfileIcons/chatIcon.svg';
+String logOutIcon = 'assets/images/ProfileIcons/logOutIcon.svg';
+String mapRoutIcon = 'assets/images/ProfileIcons/mapRoutIcon.svg';
+
 
 

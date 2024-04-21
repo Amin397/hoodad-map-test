@@ -1,7 +1,9 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:untitled1/Consts/colors.dart';
+import 'package:untitled1/Consts/icons_path.dart';
 import 'package:untitled1/Consts/measures.dart';
 import 'package:untitled1/Controllers/Home/home_controller.dart';
 import 'package:untitled1/Views/Home/Widgets/build_filter_widget.dart';
@@ -53,61 +55,38 @@ class HomeScreen extends StatelessWidget {
 
   Widget _buildTopWidgets() {
     return Align(
-      alignment: Alignment.topCenter,
-      child: Container(
-        width: Get.width,
-        height: Get.height * .12,
-        padding: EdgeInsets.only(
-          top: Get.height * .025,
-          left: Get.width * .05,
-          right: Get.width * .05,
-        ),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            InkWell(
-              onTap: () {
-                controller.goToMenu();
-                // print('azsdasd');
-              },
-              child: Container(
-                width: Get.width * .11,
-                height: Get.width * .11,
-                decoration: BoxDecoration(
-                  shape: BoxShape.circle,
-                  boxShadow: shadow(),
-                  color: Colors.white,
-                ),
-                child: Center(
-                  child: SvgPicture.asset(
-                    'assets/images/Icons/menuIcon.svg',
-                    height: Get.width * .07,
-                    width: Get.width * .07,
-                  ),
-                ),
+      alignment: Alignment.topRight,
+      child: InkWell(
+        onTap: (){
+          controller.goToMenu();
+        },
+        child: Container(
+          margin: EdgeInsets.symmetric(
+            horizontal: Get.width * .05,
+            vertical: Get.height * .04,
+          ),
+          width: Get.width * .15,
+          height: Get.width * .15,
+          decoration: BoxDecoration(
+            shape: BoxShape.circle,
+            boxShadow: shadow(),
+            color: Colors.white,
+            border: Border.all(
+              color: Colors.white,
+              width: 2.0,
+            ),
+          ),
+          child: Center(
+            child: ClipRRect(
+              borderRadius: radiusAll100,
+              child: Image.asset(
+                avatarLogo,
+                fit: BoxFit.cover,
+                width: Get.width * .15,
+                height: Get.width * .15,
               ),
             ),
-            Container(
-              width: Get.width * .15,
-              height: Get.width * .15,
-              decoration: BoxDecoration(
-                shape: BoxShape.circle,
-                boxShadow: shadow(),
-                color: Colors.white,
-                border: Border.all(
-                  color: Colors.white,
-                  width: 2.0,
-                ),
-              ),
-              child: Center(
-                child: Icon(
-                  Icons.person,
-                  color: mainColor,
-                  size: 40.0,
-                ),
-              ),
-            ),
-          ],
+          ),
         ),
       ),
     );
