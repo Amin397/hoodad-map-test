@@ -46,7 +46,9 @@ class BuildHomeBottomWidget extends StatelessWidget {
             ),
             _buildButtonsRow(
               iconOne: 'assets/images/Icons/searchIcon.svg',
-              functionOne: () {},
+              functionOne: () {
+                controller.goToSearch();
+              },
               iconTwo: 'assets/images/Icons/currentLocationIcon.svg',
               functionTwo: () {},
             ),
