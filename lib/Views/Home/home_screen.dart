@@ -28,11 +28,20 @@ class HomeScreen extends StatelessWidget {
             ),
             _buildTopWidgets(),
             Obx(
-              () => (controller.isFilterOn.isTrue)
-                  ? BuildFilterWidget(
-                      controller: controller,
-                    )
-                  : SizedBox(),
+              () => AnimatedSwitcher(
+                duration: Duration(milliseconds: 300), // Animation duration
+                transitionBuilder: (child, animation) {
+                  return ScaleTransition(
+                    scale: animation,
+                    child: child,
+                  );
+                },
+                child: (controller.isFilterOn.isTrue)
+                    ? BuildFilterWidget(
+                        controller: controller,
+                      )
+                    : SizedBox(),
+              ),
             )
           ],
         ),
