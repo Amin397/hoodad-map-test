@@ -96,7 +96,7 @@ class ProfileScreen extends StatelessWidget {
                     ),
                     animationConfig(
                       widget: _buildProfileItem(
-                        id: 1,
+                        id: 2,
                         iconPath: logOutIcon,
                         title: 'خروج از حساب',
                         withShadow: false,
@@ -200,7 +200,7 @@ class ProfileScreen extends StatelessWidget {
             width: Get.width * .4,
             height: Get.width * .4,
             child: CircularProgressIndicator(
-              value: .65,
+              // value: .65,
               strokeWidth: 3.0,
               valueColor: AlwaysStoppedAnimation<Color>(
                 avatarBorderColor,
