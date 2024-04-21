@@ -24,7 +24,13 @@ class MapSearchScreen extends StatelessWidget {
           width: Get.width,
           child: Column(
             children: [
-              _buildAppBar(),
+              buildAppBar(
+                function: () {
+                  Get.back();
+                  Get.delete<MapSearchController>();
+                },
+                title: 'جستجو محدوده مکانی',
+              ),
               animationConfig(
                 widget: _buildSearchTextField(),
                 index: 2,
@@ -71,7 +77,7 @@ class MapSearchScreen extends StatelessWidget {
                         height: Get.height * .02,
                       ),
                       BuildMapSearchListWidget(
-                        controller:controller,
+                        controller: controller,
                       )
                     ],
                   ),
@@ -80,50 +86,6 @@ class MapSearchScreen extends StatelessWidget {
             ],
           ),
         ),
-      ),
-    );
-  }
-
-  Widget _buildAppBar() {
-    return Container(
-      width: Get.width,
-      height: Get.height * .08,
-      margin: EdgeInsets.only(
-        top: Get.height * .025,
-      ),
-      padding: paddingSymmetricH20,
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          IconButton(
-            onPressed: () {
-              // Get.back();
-              // Get.delete<MapSearchController>();
-            },
-            icon: Icon(
-              Icons.clear,
-              color: Colors.white,
-              size: 10.0,
-            ),
-          ),
-          Text(
-            'جستجو محدوده مکانی',
-            style: TextStyle(
-              color: titleTextColor,
-              fontSize: 18.0,
-            ),
-          ),
-          IconButton(
-            onPressed: () {
-              Get.back();
-              Get.delete<MapSearchController>();
-            },
-            icon: Icon(
-              Icons.clear,
-              color: titleTextColor,
-            ),
-          ),
-        ],
       ),
     );
   }

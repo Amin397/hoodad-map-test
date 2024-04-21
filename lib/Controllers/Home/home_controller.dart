@@ -101,4 +101,8 @@ class HomeController extends GetxController {
   void goToSearch() async{
     Get.toNamed(NameRouts.search);
   }
+
+  void goToMenu() async{
+    Get.toNamed(NameRouts.menu);
+  }
 }
