@@ -27,18 +27,18 @@ class BuildMapWidget extends StatelessWidget {
                 // );
               },
               initialCenter: const LatLng(
-                35.80723,
-                51.42881,
+                35.79653413901838,
+                51.41736988430125,
               ),
-              initialZoom: 15.0,
+              initialZoom: 18.0,
             ),
             mapController: ctx.mapController,
             children: [
               TileLayer(
                 urlTemplate:
-                // 'https://api.maptiler.com/maps/streets-v2/{z}/{x}/{y}@2x.png?key=4c1N5rAPVh6vwCrss8Rx',
+                'https://api.maptiler.com/maps/streets-v2/{z}/{x}/{y}@2x.png?key=4c1N5rAPVh6vwCrss8Rx',
                 // 'https://basemaps.cartocdn.com/rastertiles/voyager_nolabels/{z}/{x}/{y}.png',
-                'https://api.mapbox.com/styles/v1/mapbox/light-v11/tiles/{z}/{x}/{y}?access_token=pk.eyJ1IjoiaG9vZGFkdGVjaCIsImEiOiJjbG1memp3ZGwwOXNwM3NsbGZ3MWkwdWwwIn0.-1Iv-9rRM5OtKwmkQnV2BA',
+                // 'https://api.mapbox.com/styles/v1/mapbox/light-v11/tiles/{z}/{x}/{y}?access_token=pk.eyJ1IjoiaG9vZGFkdGVjaCIsImEiOiJjbG1memp3ZGwwOXNwM3NsbGZ3MWkwdWwwIn0.-1Iv-9rRM5OtKwmkQnV2BA',
                 userAgentPackageName: 'com.example.app',
               ),
               if (ctx.routPoints.isNotEmpty)

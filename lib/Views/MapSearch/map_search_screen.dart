@@ -25,6 +25,7 @@ class MapSearchScreen extends StatelessWidget {
           child: Column(
             children: [
               buildAppBar(
+                isInnerPage: false,
                 function: () {
                   Get.back();
                   Get.delete<MapSearchController>();

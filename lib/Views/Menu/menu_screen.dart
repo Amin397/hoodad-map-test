@@ -22,6 +22,7 @@ class MenuScreen extends StatelessWidget {
         child: Column(
           children: [
             buildAppBar(
+              isInnerPage: false,
               function: () {
                 Get.back();
                 Get.delete<MapMenuController>();
@@ -48,6 +49,7 @@ class MenuScreen extends StatelessWidget {
                         id: 1,
                         title: 'اسکوترهای اسکن‌شده',
                         iconPath: scanIcon,
+
                       ),
                       index: 1,
                     ),
