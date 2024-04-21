@@ -3,6 +3,8 @@ import 'package:untitled1/Views/Home/home_screen.dart';
 import 'package:untitled1/Views/Intro/intro_screen.dart';
 import 'package:untitled1/Views/Login/login_screen.dart';
 import 'package:untitled1/Views/MapSearch/map_search_screen.dart';
+import 'package:untitled1/Views/Menu/menu_screen.dart';
+import 'package:untitled1/Views/Profile/profile_screen.dart';
 import 'package:untitled1/Views/SetRout/set_rout_screen.dart';
 import 'package:untitled1/Views/Splash/splash_screen.dart';
 
@@ -14,6 +16,8 @@ class NameRouts{
   static const String setRout = '/setRout';
   static const String home = '/home';
   static const String search = '/search';
+  static const String menu = '/menu';
+  static const String profile = '/profile';
 }
 
 class PageRout {
@@ -51,6 +55,18 @@ class PageRout {
     GetPage(
         name: NameRouts.search,
         page: () => MapSearchScreen(),
+        transition: Transition.topLevel,
+        transitionDuration: const Duration(milliseconds: 500)
+    ),
+    GetPage(
+        name: NameRouts.menu,
+        page: () => MenuScreen(),
+        transition: Transition.topLevel,
+        transitionDuration: const Duration(milliseconds: 500)
+    ),
+    GetPage(
+        name: NameRouts.profile,
+        page: () => ProfileScreen(),
         transition: Transition.topLevel,
         transitionDuration: const Duration(milliseconds: 500)
     ),

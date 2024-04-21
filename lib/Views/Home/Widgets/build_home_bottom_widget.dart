@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:untitled1/Consts/colors.dart';
+import 'package:untitled1/Consts/icons_path.dart';
 import 'package:untitled1/Consts/measures.dart';
 import 'package:untitled1/Controllers/Home/home_controller.dart';
 
@@ -35,7 +36,7 @@ class BuildHomeBottomWidget extends StatelessWidget {
         child: Column(
           children: [
             _buildButtonsRow(
-              iconOne: 'assets/images/Icons/mainFilterIcon.svg',
+              iconOne: mainFilterIcon,
               functionOne: () {
                 controller.switchFilterOn();
               },

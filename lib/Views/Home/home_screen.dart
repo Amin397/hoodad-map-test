@@ -22,7 +22,9 @@ class HomeScreen extends StatelessWidget {
         width: Get.width,
         child: Stack(
           children: [
-            BuildMapWidget(controller: controller),
+            BuildMapWidget(
+              controller: controller,
+            ),
             BuildHomeBottomWidget(
               controller: controller,
             ),
@@ -63,19 +65,25 @@ class HomeScreen extends StatelessWidget {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Container(
-              width: Get.width * .11,
-              height: Get.width * .11,
-              decoration: BoxDecoration(
-                shape: BoxShape.circle,
-                boxShadow: shadow(),
-                color: Colors.white,
-              ),
-              child: Center(
-                child: SvgPicture.asset(
-                  'assets/images/Icons/menuIcon.svg',
-                  height: Get.width * .07,
-                  width: Get.width * .07,
+            InkWell(
+              onTap: () {
+                controller.goToMenu();
+                // print('azsdasd');
+              },
+              child: Container(
+                width: Get.width * .11,
+                height: Get.width * .11,
+                decoration: BoxDecoration(
+                  shape: BoxShape.circle,
+                  boxShadow: shadow(),
+                  color: Colors.white,
+                ),
+                child: Center(
+                  child: SvgPicture.asset(
+                    'assets/images/Icons/menuIcon.svg',
+                    height: Get.width * .07,
+                    width: Get.width * .07,
+                  ),
                 ),
               ),
             ),
