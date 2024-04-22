@@ -1,5 +1,7 @@
+String tallLogo = 'assets/images/logo.png';
 
 
+String scooterImage = 'assets/images/aboutUsScooter.png';
 
 
 //homeIcons

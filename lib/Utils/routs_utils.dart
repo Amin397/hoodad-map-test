@@ -10,6 +10,7 @@ import 'package:untitled1/Views/Menu/menu_screen.dart';
 import 'package:untitled1/Views/Profile/profile_screen.dart';
 import 'package:untitled1/Views/SetRout/set_rout_screen.dart';
 import 'package:untitled1/Views/Splash/splash_screen.dart';
+import 'package:untitled1/Views/TaalInfo/taal_info_screen.dart';
 
 
 class NameRouts{
@@ -24,6 +25,7 @@ class NameRouts{
   static const String editProfile = '/editProfile';
   static const String history = '/history';
   static const String incomes = '/incomes';
+  static const String taalInfo = '/taalInfo';
 }
 
 class PageRout {
@@ -91,6 +93,12 @@ class PageRout {
     GetPage(
         name: NameRouts.incomes,
         page: () => IncomesScreen(),
+        transition: Transition.downToUp,
+        transitionDuration: const Duration(milliseconds: 500)
+    ),
+    GetPage(
+        name: NameRouts.taalInfo,
+        page: () => TaalInfoScreen(),
         transition: Transition.downToUp,
         transitionDuration: const Duration(milliseconds: 500)
     ),

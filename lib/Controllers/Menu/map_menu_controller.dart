@@ -25,6 +25,7 @@ class MapMenuController extends GetxController{
         break;
       }
       case 5:{
+        Get.toNamed(NameRouts.taalInfo);
         break;
       }
       case 6:{
