@@ -3,10 +3,7 @@ import 'package:get/get.dart';
 import 'package:untitled1/Utils/routs_utils.dart';
 
 void main()async{
-
-
   WidgetsFlutterBinding.ensureInitialized();
-
   runApp(
     GetMaterialApp(
       debugShowCheckedModeBanner: false,

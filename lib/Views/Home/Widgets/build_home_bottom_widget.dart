@@ -116,8 +116,8 @@ class BuildHomeBottomWidget extends StatelessWidget {
               child: Center(
                 child: SvgPicture.asset(
                   iconOne,
-                  height: Get.width * .07,
-                  width: Get.width * .07,
+                  height: Get.width * .06,
+                  width: Get.width * .06,
                 ),
               ),
             ),
@@ -135,8 +135,8 @@ class BuildHomeBottomWidget extends StatelessWidget {
               child: Center(
                 child: SvgPicture.asset(
                   iconTwo,
-                  height: Get.width * .07,
-                  width: Get.width * .07,
+                  height: Get.width * .06,
+                  width: Get.width * .06,
                 ),
               ),
             ),
