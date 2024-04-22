@@ -7,6 +7,7 @@ import 'package:untitled1/Views/Intro/intro_screen.dart';
 import 'package:untitled1/Views/Login/login_screen.dart';
 import 'package:untitled1/Views/MapSearch/map_search_screen.dart';
 import 'package:untitled1/Views/Menu/menu_screen.dart';
+import 'package:untitled1/Views/Messages/messages_screen.dart';
 import 'package:untitled1/Views/Profile/profile_screen.dart';
 import 'package:untitled1/Views/SetRout/set_rout_screen.dart';
 import 'package:untitled1/Views/Splash/splash_screen.dart';
@@ -26,6 +27,7 @@ class NameRouts{
   static const String history = '/history';
   static const String incomes = '/incomes';
   static const String taalInfo = '/taalInfo';
+  static const String messages = '/messages';
 }
 
 class PageRout {
@@ -75,31 +77,37 @@ class PageRout {
     GetPage(
         name: NameRouts.profile,
         page: () => ProfileScreen(),
-        transition: Transition.downToUp,
+        transition: Transition.rightToLeft,
         transitionDuration: const Duration(milliseconds: 500)
     ),
     GetPage(
         name: NameRouts.editProfile,
         page: () => EditProfileScreen(),
-        transition: Transition.downToUp,
+        transition: Transition.rightToLeft,
         transitionDuration: const Duration(milliseconds: 500)
     ),
     GetPage(
         name: NameRouts.history,
         page: () => HistoryScreen(),
-        transition: Transition.downToUp,
+        transition: Transition.rightToLeft,
         transitionDuration: const Duration(milliseconds: 500)
     ),
     GetPage(
         name: NameRouts.incomes,
         page: () => IncomesScreen(),
-        transition: Transition.downToUp,
+        transition: Transition.rightToLeft,
         transitionDuration: const Duration(milliseconds: 500)
     ),
     GetPage(
         name: NameRouts.taalInfo,
         page: () => TaalInfoScreen(),
-        transition: Transition.downToUp,
+        transition: Transition.rightToLeft,
+        transitionDuration: const Duration(milliseconds: 500)
+    ),
+    GetPage(
+        name: NameRouts.messages,
+        page: () => MessagesScreen(),
+        transition: Transition.rightToLeft,
         transitionDuration: const Duration(milliseconds: 500)
     ),
   ];
