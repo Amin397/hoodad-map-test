@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
@@ -65,16 +66,24 @@ class IncomesScreen extends StatelessWidget {
                       ),
                     ),
                     SizedBox(
-                      height: Get.height * .015,
+                      height: Get.height * .01,
                     ),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        Text(
-                          replaceFarsiNumber(moneyFormat(5000000 , toman: true)),
-                          style: TextStyle(
-                            color: avatarBorderColor,
-                            fontSize: 16.0,
+                        Directionality(
+                          textDirection: TextDirection.rtl,
+                          child: Text(
+                            replaceFarsiNumber(
+                              moneyFormat(
+                                5000000,
+                                toman: true,
+                              ),
+                            ),
+                            style: TextStyle(
+                              color: avatarBorderColor,
+                              fontSize: 20.0,
+                            ),
                           ),
                         ),
                         Text(
