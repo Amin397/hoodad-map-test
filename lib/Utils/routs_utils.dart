@@ -1,5 +1,6 @@
 import 'package:get/get.dart';
 import 'package:untitled1/Views/EditProfile/edit_profile_screen.dart';
+import 'package:untitled1/Views/History/history_screen.dart';
 import 'package:untitled1/Views/Home/home_screen.dart';
 import 'package:untitled1/Views/Intro/intro_screen.dart';
 import 'package:untitled1/Views/Login/login_screen.dart';
@@ -20,6 +21,7 @@ class NameRouts{
   static const String menu = '/menu';
   static const String profile = '/profile';
   static const String editProfile = '/editProfile';
+  static const String history = '/history';
 }
 
 class PageRout {
@@ -69,13 +71,19 @@ class PageRout {
     GetPage(
         name: NameRouts.profile,
         page: () => ProfileScreen(),
-        transition: Transition.topLevel,
+        transition: Transition.downToUp,
         transitionDuration: const Duration(milliseconds: 500)
     ),
     GetPage(
         name: NameRouts.editProfile,
         page: () => EditProfileScreen(),
-        transition: Transition.topLevel,
+        transition: Transition.downToUp,
+        transitionDuration: const Duration(milliseconds: 500)
+    ),
+    GetPage(
+        name: NameRouts.history,
+        page: () => HistoryScreen(),
+        transition: Transition.downToUp,
         transitionDuration: const Duration(milliseconds: 500)
     ),
   ];
