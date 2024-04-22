@@ -226,5 +226,5 @@ String moneyFormat(
   bool toman = false,
 }) {
   price ??= 0.0;
-  return price.toInt().toString().seRagham() + (toman ? '   تومان ' : '');
+  return price.toInt().toString().seRagham() + (toman ? ' تومان ' : '');
 }

@@ -35,12 +35,13 @@ String logOutIcon = 'assets/images/ProfileIcons/logOutIcon.svg';
 String mapRoutIcon = 'assets/images/ProfileIcons/mapRoutIcon.svg';
 
 
-//historyIcons
+//historyIcons & Incomes
 
 String scooterIcon = 'assets/images/Icons/scooterIcon.svg';
 String clockIcon = 'assets/images/Icons/clockIcon.svg';
 String chargeStatusIcon = 'assets/images/Icons/chargeStatusIcon.svg';
 String travelStatusIcon = 'assets/images/Icons/travelStatusIcon.svg';
+String homeStatusIcon = 'assets/images/Icons/homeStatusIcon.svg';
 
 
 

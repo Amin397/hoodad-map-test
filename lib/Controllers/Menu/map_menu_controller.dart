@@ -18,6 +18,7 @@ class MapMenuController extends GetxController{
         break;
       }
       case 3:{
+        Get.toNamed(NameRouts.incomes);
         break;
       }
       case 4:{
