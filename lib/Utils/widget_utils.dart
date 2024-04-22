@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:get/get.dart';
@@ -59,6 +60,77 @@ Widget buildAppBar({
           ),
         ),
       ],
+    ),
+  );
+}
+
+
+
+Widget filledTextField({
+  required TextEditingController controller,
+  required String label,
+  Widget suffix = const SizedBox(),
+  Widget prefix = const SizedBox(),
+  int? maxLine,
+  int? maxLength,
+  ValueChanged<String>? onChange,
+  required TextStyle textStyle,
+  TextAlign textAlign = TextAlign.left,
+  GestureTapCallback? onTap,
+  TextInputAction inputAction = TextInputAction.done,
+  TextInputType inputType = TextInputType.text,
+  bool autoFocus = false,
+  bool obscureText = false,
+}){
+  return Directionality(
+    textDirection: TextDirection.rtl,
+    child: Container(
+      width: Get.width * .9,
+      height: Get.height * .06,
+      child: Center(
+        child: TextField(
+          controller: controller,
+          style: textStyle,
+          maxLines: 1,
+          textInputAction: inputAction,
+          textAlign: textAlign,
+          keyboardType: inputType,
+          obscureText: obscureText,
+          autofocus: autoFocus,
+          maxLength: maxLength,
+          textAlignVertical: TextAlignVertical.center,
+          cursorColor: searchBorderColor,
+          decoration: InputDecoration(
+            counterText: '',
+            filled: true,
+            fillColor: fillTextColor,
+            // b
+            labelStyle: TextStyle(
+              fontSize: 16.0,
+              color: Colors.grey.withOpacity(.7),
+            ),
+            labelText: label,
+            enabledBorder: OutlineInputBorder(
+              borderRadius: radiusAll20,
+              borderSide: BorderSide(
+                width: .5,
+                color: Colors.grey.withOpacity(.1),
+              ),
+            ),
+            focusedBorder: OutlineInputBorder(
+              borderRadius: radiusAll20,
+              borderSide: BorderSide(
+                width: 2.0,
+                color: searchBorderColor,
+              ),
+            ),
+            enabled: true,
+            suffixIcon: suffix,
+            prefix: prefix,
+            // prefixIcon: prefix,
+          ),
+        ),
+      ),
     ),
   );
 }

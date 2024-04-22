@@ -136,9 +136,11 @@ class ProfileScreen extends StatelessWidget {
         padding: paddingSymmetricH8,
         decoration: BoxDecoration(
           color: Colors.white,
-          boxShadow:(withShadow)? shadow(
-            offset: Offset(0.0, 3.0),
-          ):[],
+          boxShadow: (withShadow)
+              ? shadow(
+                  offset: Offset(0.0, 3.0),
+                )
+              : [],
           borderRadius: radiusAll12,
         ),
         margin: paddingSymmetricV8,
@@ -199,22 +201,40 @@ class ProfileScreen extends StatelessWidget {
           SizedBox(
             width: Get.width * .4,
             height: Get.width * .4,
-            child: CircularProgressIndicator(
-              // value: .65,
-              strokeWidth: 3.0,
-              valueColor: AlwaysStoppedAnimation<Color>(
-                avatarBorderColor,
-              ),
+            child: Obx(
+              () => (controller.animationStart.isTrue)
+                  ? CircularProgressIndicator(
+                      // value: .65,
+                      strokeWidth: 3.0,
+                      valueColor: AlwaysStoppedAnimation<Color>(
+                        mainColor,
+                      ),
+                    )
+                  : CircularProgressIndicator(
+                      value: .65,
+                      strokeWidth: 3.0,
+                      valueColor: AlwaysStoppedAnimation<Color>(
+                        avatarBorderColor,
+                      ),
+                    ),
             ),
           ),
           Center(
-            child: ClipRRect(
-              borderRadius: radiusAll100,
-              child: Image.asset(
-                avatarLogo,
-                fit: BoxFit.cover,
-                width: Get.width * .38,
-                height: Get.width * .38,
+            child: InkWell(
+              onTap: (){
+                controller.startAnimation();
+              },
+              customBorder: RoundedRectangleBorder(
+                borderRadius: radiusAll80,
+              ),
+              child: ClipRRect(
+                borderRadius: radiusAll100,
+                child: Image.asset(
+                  avatarLogo,
+                  fit: BoxFit.cover,
+                  width: Get.width * .38,
+                  height: Get.width * .38,
+                ),
               ),
             ),
           )

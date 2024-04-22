@@ -94,51 +94,63 @@ class MapSearchScreen extends StatelessWidget {
   Widget _buildSearchTextField() {
     return Directionality(
       textDirection: TextDirection.rtl,
-      child: Container(
-        width: Get.width * .9,
-        height: Get.height * .06,
-        child: Center(
-          child: TextField(
-            controller: controller.searchTextController,
-            style: TextStyle(),
-            maxLines: 1,
-            textInputAction: TextInputAction.search,
-            textAlign: TextAlign.right,
-            textAlignVertical: TextAlignVertical.center,
-            cursorColor: searchBorderColor,
-            decoration: InputDecoration(
-              filled: true,
-              fillColor: Color(0XFFF6F6F6),
-              // b
-              labelStyle: TextStyle(
-                fontSize: 16.0,
-                color: Colors.grey.withOpacity(.7),
-              ),
-              labelText: 'جستجوی محدوده',
-              enabledBorder: OutlineInputBorder(
-                borderRadius: radiusAll20,
-                borderSide: BorderSide(
-                  width: 2.0,
-                  color: Colors.grey.withOpacity(.4),
-                ),
-              ),
-              focusedBorder: OutlineInputBorder(
-                borderRadius: radiusAll20,
-                borderSide: BorderSide(
-                  width: 2.0,
-                  color: searchBorderColor,
-                ),
-              ),
-              enabled: true,
-              suffixIcon: Icon(
-                Icons.search,
-                color: Colors.grey,
-              ),
-              // prefixIcon: prefix,
-            ),
-          ),
+      child: filledTextField(
+        controller: controller.searchTextController,
+        label: 'جستجوی محدوده',
+        textStyle: TextStyle(),
+        suffix:Icon(
+          Icons.search,
+          color: Colors.grey,
         ),
+        maxLine: 1,
+        inputAction: TextInputAction.search,
+        textAlign: TextAlign.right,
       ),
+      // child: Container(
+      //   width: Get.width * .9,
+      //   height: Get.height * .06,
+      //   child: Center(
+      //     child: TextField(
+      //       controller: controller.searchTextController,
+      //       style: TextStyle(),
+      //       maxLines: 1,
+      //       textInputAction: TextInputAction.search,
+      //       textAlign: TextAlign.right,
+      //       textAlignVertical: TextAlignVertical.center,
+      //       cursorColor: searchBorderColor,
+      //       decoration: InputDecoration(
+      //         filled: true,
+      //         fillColor: Color(0XFFF6F6F6),
+      //         // b
+      //         labelStyle: TextStyle(
+      //           fontSize: 16.0,
+      //           color: Colors.grey.withOpacity(.7),
+      //         ),
+      //         labelText: 'جستجوی محدوده',
+      //         enabledBorder: OutlineInputBorder(
+      //           borderRadius: radiusAll20,
+      //           borderSide: BorderSide(
+      //             width: 2.0,
+      //             color: Colors.grey.withOpacity(.4),
+      //           ),
+      //         ),
+      //         focusedBorder: OutlineInputBorder(
+      //           borderRadius: radiusAll20,
+      //           borderSide: BorderSide(
+      //             width: 2.0,
+      //             color: searchBorderColor,
+      //           ),
+      //         ),
+      //         enabled: true,
+      //         suffixIcon: Icon(
+      //           Icons.search,
+      //           color: Colors.grey,
+      //         ),
+      //         // prefixIcon: prefix,
+      //       ),
+      //     ),
+      //   ),
+      // ),
     );
   }
 }
