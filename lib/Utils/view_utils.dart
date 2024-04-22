@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:lottie/lottie.dart';
+import 'package:persian_number_utility/persian_number_utility.dart';
 import 'package:untitled1/Consts/colors.dart';
 import 'package:untitled1/Consts/measures.dart';
 
@@ -209,7 +210,6 @@ void showLoadingAlert() {
   });
 }
 
-
 String replaceFarsiNumber(String input) {
   const english = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9'];
   const farsi = ['۰', '۱', '۲', '۳', '۴', '۵', '۶', '۷', '۸', '۹'];
@@ -221,3 +221,10 @@ String replaceFarsiNumber(String input) {
   return input;
 }
 
+String moneyFormat(
+  double? price, {
+  bool toman = false,
+}) {
+  price ??= 0.0;
+  return price.toInt().toString().seRagham() + (toman ? '   تومان ' : '');
+}

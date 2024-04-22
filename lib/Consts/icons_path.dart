@@ -28,13 +28,21 @@ String settingIcon = 'assets/images/MenuIcons/settingIcon.svg';
 
 
 //profileIcon
-
-
 String avatarLogo = 'assets/images/ProfileIcons/avatar.jpg';
 String cameraIcon = 'assets/images/ProfileIcons/cameraIcon.svg';
 String chatIcon = 'assets/images/ProfileIcons/chatIcon.svg';
 String logOutIcon = 'assets/images/ProfileIcons/logOutIcon.svg';
 String mapRoutIcon = 'assets/images/ProfileIcons/mapRoutIcon.svg';
+
+
+//historyIcons
+
+String scooterIcon = 'assets/images/Icons/scooterIcon.svg';
+String clockIcon = 'assets/images/Icons/clockIcon.svg';
+String chargeStatusIcon = 'assets/images/Icons/chargeStatusIcon.svg';
+String travelStatusIcon = 'assets/images/Icons/travelStatusIcon.svg';
+
+
 
 
 
