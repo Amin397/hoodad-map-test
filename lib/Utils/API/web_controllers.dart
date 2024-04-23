@@ -1,3 +1,4 @@
 enum WebController{
   Authentication,
+  TaalBaanUser,
 }

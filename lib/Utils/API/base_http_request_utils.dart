@@ -65,16 +65,16 @@ class BaseHttpRequest {
         pathVariable: pathVariable,
         queryParameters: queryParameters,
       );
-      print('~~~~~~~~~>Path: \n');
+      print('~~~~~~~~~>Path<~~~~~~~~~~~~: \n');
       print(pathUri);
 
-      print('~~~~~~~~~>Body: \n');
+      print('~~~~~~~~~>Body<~~~~~~~~~~~~: \n');
       print(body);
 
-      print('~~~~~~~~~>Header: \n');
+      print('~~~~~~~~~>Header<~~~~~~~~~~~~: \n');
       print(headers);
 
-      print('~~~~~~~~~>Type: \n');
+      print('~~~~~~~~~>Type<~~~~~~~~~~~~: \n');
 
       print(type);
 
@@ -97,7 +97,7 @@ class BaseHttpRequest {
             } catch (e) {
               print(e);
             }
-            print('~~~~~~~~~>Response: \n');
+            print('~~~~~~~~~>Response<~~~~~~~~~~~~: \n');
             print(response!.body);
             return response;
           }
