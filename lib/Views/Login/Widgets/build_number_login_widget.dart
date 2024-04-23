@@ -108,10 +108,9 @@ class BuildNumberLoginWidget extends StatelessWidget {
                 alignment: Alignment.bottomCenter,
                 child: InkWell(
                   onTap: () {
-                    controller.sendOtpCode();
-                    //
-                    //
-                    // print('asasas');
+                    controller.sendOtpCode(
+                      isResend: false,
+                    );
                   },
                   child: animationConfig(
                     widget: Container(

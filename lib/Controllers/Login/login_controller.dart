@@ -9,6 +9,7 @@ import 'package:untitled1/Consts/error_code.dart';
 import 'package:untitled1/Utils/API/project_requests_utils.dart';
 import 'package:untitled1/Utils/routs_utils.dart';
 import 'package:untitled1/Utils/shake_animation_utils.dart';
+import 'package:untitled1/Utils/storage_utils.dart';
 import 'package:untitled1/Utils/view_utils.dart';
 
 class LoginController extends GetxController {
@@ -17,11 +18,12 @@ class LoginController extends GetxController {
   String? phoneNumber;
   String? otpId;
   RxString errorText = ''.obs;
+  String pinErrorText = '';
   int? userId;
 
   Timer? timeToResend;
 
-  RxInt secondsRemaining = 60.obs;
+  RxInt secondsRemaining = 120.obs;
 
   TextEditingController? phoneNumberTextController;
   TextEditingController? pinCodeTextController;
@@ -42,7 +44,7 @@ class LoginController extends GetxController {
   }
 
   void startTimer() {
-    secondsRemaining(60);
+    secondsRemaining(120);
     timeToResend =
         new Timer.periodic(const Duration(seconds: 1), (Timer timer) {
       if (secondsRemaining < 1) {
@@ -60,8 +62,9 @@ class LoginController extends GetxController {
     return '${minutes.toString().padLeft(2, '0')}:${seconds.toString().padLeft(2, '0')}';
   }
 
-  void sendOtpCode() async {
+  void sendOtpCode({required bool isResend}) async {
     FocusManager.instance.primaryFocus?.unfocus();
+    errorText('');
     showLoadingAlert();
     requests
         .sendOtpCode(
@@ -75,20 +78,25 @@ class LoginController extends GetxController {
         errorText.value = '';
         otpId = apiResult['result']['otpId'];
         userId = apiResult['result']['userId'];
-        isNumberEntered = true;
+        pinCodeTextController!.clear();
+        if (!isResend) {
+          isNumberEntered = true;
+        }
         startTimer();
         showSuccessSnakeBar(
           body: 'کد تایید برای شما ارسال شد',
         );
         update(['loginSwitcher']);
       } else {
-        Future.delayed(const Duration(milliseconds: 400), () {
-          numberErrorKey.currentState!.shake();
-        });
-
         errorText.value = errorList
             .singleWhere((element) => element.code == apiResult['errorCode'])
             .message;
+
+        Future.delayed(const Duration(milliseconds: 400), () {
+          if (!isResend) {
+            numberErrorKey.currentState!.shake();
+          }
+        });
         showErrorSnakeBar(
           body: errorText.value,
         );
@@ -108,10 +116,9 @@ class LoginController extends GetxController {
   void changePhoneNumber() {
     FocusManager.instance.primaryFocus?.unfocus();
     timeToResend!.cancel();
-    secondsRemaining(60);
-    // pinCodeTextController!.dispose();
-    // phoneNumberTextController = TextEditingController();
-    // errorController!.close();
+    secondsRemaining(120);
+    errorText.value = '';
+    hasError(false);
     Future.delayed(const Duration(milliseconds: 500), () {
       isNumberEntered = false;
       update(['loginSwitcher']);
@@ -123,5 +130,61 @@ class LoginController extends GetxController {
     Get.offAllNamed(
       NameRouts.home,
     );
+  }
+
+  void verifyOtpCode({required String code}) async {
+    showLoadingAlert();
+    requests.verifyOtpCode(otpCode: code, otpId: otpId!, userId: userId!).then(
+      (value) async {
+        Map<String, dynamic> apiResult = jsonDecode(value!.body);
+        if (apiResult['errorCode'] == null) {
+          timeToResend!.cancel();
+          secondsRemaining(0);
+
+          await generateToken();
+
+          // Get.offAllNamed(
+          //   NameRouts.home,
+          // );
+        } else {
+          Get.back();
+          hasError(true);
+          Future.delayed(const Duration(milliseconds: 400), () {
+            pinErrorKey.currentState!.shake();
+          });
+          pinErrorText = errorList
+              .singleWhere((element) => element.code == apiResult['errorCode'])
+              .message;
+          showErrorSnakeBar(
+            body: pinErrorText,
+          );
+        }
+      },
+    );
+  }
+
+  Future<void> generateToken() async {
+    requests
+        .generateToken(
+      otpId: otpId!,
+      userId: userId!,
+      otpCode: pinCodeTextController!.text,
+    )
+        .then((value) {
+      hasError(false);
+      Get.back();
+
+      Map<String, dynamic> apiResult = jsonDecode(value!.body);
+      if (apiResult['errorCode'] == null) {
+        StorageUtils.setToken(token: apiResult['result']['token']);
+        showSuccessSnakeBar(
+          body: 'با موفقیت وارد شدی',
+        );
+        Future.delayed(const Duration(seconds: 4), () {
+          Get.offAllNamed(NameRouts.home);
+          Get.delete<LoginController>();
+        });
+      }
+    });
   }
 }
