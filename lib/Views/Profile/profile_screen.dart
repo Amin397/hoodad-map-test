@@ -227,13 +227,16 @@ class ProfileScreen extends StatelessWidget {
               customBorder: RoundedRectangleBorder(
                 borderRadius: radiusAll80,
               ),
-              child: ClipRRect(
-                borderRadius: radiusAll100,
-                child: Image.asset(
-                  avatarLogo,
-                  fit: BoxFit.cover,
-                  width: Get.width * .38,
-                  height: Get.width * .38,
+              child: Hero(
+                tag: 'ProfilePicture',
+                child: ClipRRect(
+                  borderRadius: radiusAll100,
+                  child: Image.asset(
+                    avatarLogo,
+                    fit: BoxFit.cover,
+                    width: Get.width * .38,
+                    height: Get.width * .38,
+                  ),
                 ),
               ),
             ),

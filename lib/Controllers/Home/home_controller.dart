@@ -48,8 +48,6 @@ class HomeController extends GetxController with GetTickerProviderStateMixin {
 
   @override
   void onInit() {
-    // updateLocation();
-
     initData();
     super.onInit();
   }
@@ -100,7 +98,6 @@ class HomeController extends GetxController with GetTickerProviderStateMixin {
     isPlaying
         ? animationController!.forward()
         : animationController!.reverse();
-    // Future.delayed(const Duration(milliseconds: 100) , (){
       if(isPlaying){
         isFilterOn(!isFilterOn.value);
         update(['filterSwitch']);
@@ -120,7 +117,7 @@ class HomeController extends GetxController with GetTickerProviderStateMixin {
     task.isSelected(true);
 
     Future.delayed(const Duration(milliseconds: 500), () {
-      isFilterOn(false);
+      switchFilterOn();
     });
   }
 
