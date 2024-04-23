@@ -1,9 +1,12 @@
+import 'dart:async';
+
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:untitled1/Consts/colors.dart';
 import 'package:untitled1/Consts/measures.dart';
 import 'package:untitled1/Controllers/Login/login_controller.dart';
+import 'package:untitled1/Utils/shake_animation_utils.dart';
 import 'package:untitled1/Utils/view_utils.dart';
 import 'package:untitled1/Utils/widget_utils.dart';
 
@@ -24,14 +27,20 @@ class BuildNumberLoginWidget extends StatelessWidget {
           animationConfig(
             widget: Text(
               'ورود به اپلیکیشن تال‌بان',
-              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 22.0),
+              style: TextStyle(
+                fontWeight: FontWeight.bold,
+                fontSize: 22.0,
+              ),
             ),
             index: 1,
           ),
           animationConfig(
             widget: Text(
               '. برای ورود شماره موبایل خود را وارد کنید',
-              style: TextStyle(fontSize: 18.0, color: Colors.black45),
+              style: TextStyle(
+                fontSize: 18.0,
+                color: Colors.black45,
+              ),
             ),
             index: 1,
           ),
@@ -49,25 +58,47 @@ class BuildNumberLoginWidget extends StatelessWidget {
             height: Get.height * .01,
           ),
           animationConfig(
-            widget: myTextField(
-              width: Get.width,
-              height: Get.height * .07,
-              hint: 'شماره موبایل خود را وارد کنید',
-              controller: controller.phoneNumberTextController!,
-              textStyle: TextStyle(
-                fontSize: 22.0,
-              ),
-              textAlign: TextAlign.center,
-              inputType: TextInputType.number,
-              enable: true,
-              maxLine: 1,
-              maxLength: 11,
-              suffix: Icon(
-                Icons.phone_android_outlined,
-                color: Colors.grey,
+            widget: CustomShakeWidget(
+              shakeCount: 4,
+              shakeOffset: 4.0,
+              duration: const Duration(milliseconds: 750),
+              key: controller.numberErrorKey,
+              child: myTextField(
+                width: Get.width,
+                height: Get.height * .07,
+                hint: 'شماره موبایل خود را وارد کنید',
+                controller: controller.phoneNumberTextController!,
+                textStyle: TextStyle(
+                  fontSize: 22.0,
+                ),
+                textAlign: TextAlign.center,
+                inputType: TextInputType.number,
+                enable: true,
+                maxLine: 1,
+                maxLength: 11,
+                suffix: Icon(
+                  Icons.phone_android_outlined,
+                  color: Colors.grey,
+                ),
               ),
             ),
             index: 2,
+          ),
+          SizedBox(
+            height: Get.height * .01,
+          ),
+          Obx(
+            () => (controller.errorText.value.length > 3)
+                ? animationConfig(
+                    widget: Text(
+                      controller.errorText.value,
+                      style: TextStyle(
+                        color: Colors.red.shade700,
+                      ),
+                    ),
+                    index: 2,
+                  )
+                : SizedBox(),
           ),
           Expanded(
             child: SizedBox(
@@ -78,6 +109,9 @@ class BuildNumberLoginWidget extends StatelessWidget {
                 child: InkWell(
                   onTap: () {
                     controller.sendOtpCode();
+                    //
+                    //
+                    // print('asasas');
                   },
                   child: animationConfig(
                     widget: Container(

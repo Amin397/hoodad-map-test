@@ -115,7 +115,7 @@ Widget LoadingAlertWidget({
             height: Get.height * .01,
           ),
           Text(
-            'Loading...',
+            'لطفا منتظر باشید...',
             style: TextStyle(
               color: Colors.white,
               fontSize: 16.0,
@@ -138,7 +138,7 @@ Widget LoadingAlertWidget({
                     ),
                     child: Center(
                       child: AutoSizeText(
-                        'Cancel',
+                        'انصراف',
                         maxLines: 1,
                         maxFontSize: 20.0,
                         minFontSize: 14.0,
@@ -160,7 +160,7 @@ void showSuccessSnakeBar({
   required String body,
 }) async {
   Get.snackbar(
-    'Yesss :)',
+    'ایول :)',
     body,
     forwardAnimationCurve: Curves.fastLinearToSlowEaseIn,
     backgroundColor: Colors.green.withOpacity(.5),
@@ -180,6 +180,34 @@ void showSuccessSnakeBar({
     // borderColor: Colors.green,
   );
 }
+
+void showErrorSnakeBar({
+  required String body,
+}) async {
+  Get.snackbar(
+    'ای بابا ...',
+    body,
+    forwardAnimationCurve: Curves.fastLinearToSlowEaseIn,
+    backgroundColor: Colors.red.withOpacity(.5),
+    snackPosition: SnackPosition.TOP,
+    margin: paddingAll6,
+    leftBarIndicatorColor: Colors.red.shade800,
+    colorText: Colors.black,
+    animationDuration: const Duration(milliseconds: 800),
+    duration: const Duration(seconds: 4),
+    // boxShadows: shadow(),
+    icon: Lottie.asset(
+      'assets/anims/faild.json',
+    ),
+    barBlur: 3.0,
+    borderRadius: 10.0,
+    isDismissible: true,
+    // borderWidth: 1.5,
+    // borderColor: Colors.red,
+  );
+}
+
+
 
 void showLoadingAlert() {
   RxBool isCanCancel = false.obs;
@@ -228,3 +256,5 @@ String moneyFormat(
   price ??= 0.0;
   return price.toInt().toString().seRagham() + (toman ? ' تومان ' : '');
 }
+
+

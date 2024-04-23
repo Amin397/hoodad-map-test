@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import 'package:untitled1/Consts/colors.dart';
 import 'package:untitled1/Consts/measures.dart';
 import 'package:untitled1/Controllers/Login/login_controller.dart';
+import 'package:untitled1/Utils/view_utils.dart';
 import 'package:untitled1/Utils/widget_utils.dart';
 import 'package:untitled1/Views/Login/Widgets/build_pin_code_fields_widget.dart';
 
@@ -43,7 +44,9 @@ class BuildOtpCodeWidget extends StatelessWidget {
                 ),
                 children: [
                   TextSpan(
-                    text: controller.phoneNumberTextController!.text,
+                    text: replaceFarsiNumber(
+                      controller.phoneNumberTextController!.text,
+                    ),
                     style: TextStyle(
                       fontWeight: FontWeight.bold,
                       fontSize: 22.0,
