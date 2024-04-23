@@ -1,6 +1,7 @@
 import 'package:http/http.dart' as http;
 import 'package:untitled1/Utils/API/web_controllers.dart';
 import 'package:untitled1/Utils/API/web_methods.dart';
+import 'package:untitled1/Utils/storage_utils.dart';
 
 import 'base_http_request_utils.dart';
 
@@ -14,7 +15,7 @@ class ProjectRequestsUtils extends BaseHttpRequest {
       webController: WebController.Authentication,
       webMethod: WebMethods.LoginTaalBaan,
       type: 'post',
-        // 'Authorization': 'Bearer ' + await StorageUtils.getToken(),
+
       headers: {
         'Content-Type': 'application/json',
       },
@@ -61,6 +62,18 @@ class ProjectRequestsUtils extends BaseHttpRequest {
         'userId': userId,
         'otpId': otpId,
         'otpCode': otpCode,
+      },
+    );
+  }
+
+  Future<http.Response?> getUserInfo() async {
+    return await makeHttpRequest(
+      webController: WebController.TaalBaanUser,
+      webMethod: WebMethods.GetMyProfile,
+      type: 'post',
+      headers: {
+        'Authorization': 'Bearer ' + await StorageUtils.getToken(),
+        'Content-Type': 'application/json',
       },
     );
   }

@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:untitled1/Consts/colors.dart';
-import 'package:untitled1/Consts/measures.dart';
 import 'package:untitled1/Controllers/Splash/splash_controller.dart';
 
 class SplashScreen extends StatelessWidget {
