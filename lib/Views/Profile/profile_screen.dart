@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
+import 'package:untitled1/Blocs/blocs_utils.dart';
 import 'package:untitled1/Consts/colors.dart';
 import 'package:untitled1/Consts/icons_path.dart';
 import 'package:untitled1/Consts/measures.dart';
@@ -46,23 +47,31 @@ class ProfileScreen extends StatelessWidget {
                       height: Get.height * .02,
                     ),
                     animationConfig(
-                      widget: Text(
-                        'محمد امین خادمی',
-                        style: TextStyle(
-                          color: titleTextColor,
-                          fontSize: 18.0,
-                        ),
+                      widget: StreamBuilder(
+                        stream: Blocs.infoBloc.getStream,
+                        builder: (c, x) {
+                          return Text(
+                            Blocs.infoBloc.info!.name!,
+                            style: TextStyle(
+                              color: titleTextColor,
+                              fontSize: 18.0,
+                            ),
+                          );
+                        },
                       ),
                       index: 2,
                     ),
                     animationConfig(
-                      widget: Text(
-                        replaceFarsiNumber(
-                          '09383974483',
-                        ),
-                        style: TextStyle(
-                          color: titleTextColor,
-                          fontSize: 18.0,
+                      widget: StreamBuilder(
+                        stream: Blocs.infoBloc.getStream,
+                        builder: (c, x) => Text(
+                          replaceFarsiNumber(
+                            Blocs.infoBloc.info!.mobile!,
+                          ),
+                          style: TextStyle(
+                            color: titleTextColor,
+                            fontSize: 18.0,
+                          ),
                         ),
                       ),
                       index: 2,
@@ -221,7 +230,7 @@ class ProfileScreen extends StatelessWidget {
           ),
           Center(
             child: InkWell(
-              onTap: (){
+              onTap: () {
                 controller.startAnimation();
               },
               customBorder: RoundedRectangleBorder(

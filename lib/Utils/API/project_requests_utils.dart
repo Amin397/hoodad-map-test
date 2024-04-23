@@ -6,8 +6,6 @@ import 'package:untitled1/Utils/storage_utils.dart';
 import 'base_http_request_utils.dart';
 
 class ProjectRequestsUtils extends BaseHttpRequest {
-
-
   Future<http.Response?> sendOtpCode({
     required String phoneNumber,
   }) async {
@@ -15,7 +13,6 @@ class ProjectRequestsUtils extends BaseHttpRequest {
       webController: WebController.Authentication,
       webMethod: WebMethods.LoginTaalBaan,
       type: 'post',
-
       headers: {
         'Content-Type': 'application/json',
       },
@@ -24,7 +21,6 @@ class ProjectRequestsUtils extends BaseHttpRequest {
       },
     );
   }
-
 
   Future<http.Response?> verifyOtpCode({
     required String otpId,
@@ -74,6 +70,31 @@ class ProjectRequestsUtils extends BaseHttpRequest {
       headers: {
         'Authorization': 'Bearer ' + await StorageUtils.getToken(),
         'Content-Type': 'application/json',
+      },
+    );
+  }
+
+  Future<http.Response?> editProfile({
+    required String name,
+    required String family,
+    required String email,
+    required int gender,
+    String? image,
+  }) async {
+    return await makeHttpRequest(
+      webController: WebController.TaalBaanUser,
+      webMethod: WebMethods.EditeMyProfile,
+      type: 'post',
+      headers: {
+        'Authorization': 'Bearer ' + await StorageUtils.getToken(),
+        'Content-Type': 'multipart/form-data',
+      },
+      body: {
+        'Name': name,
+        'Family': family,
+        'Gender': gender,
+        'Email': email,
+        'Image': image,
       },
     );
   }

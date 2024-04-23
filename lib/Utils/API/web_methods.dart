@@ -3,4 +3,5 @@ enum WebMethods {
   VerifyOtp,
   GenerateTaalBaanToken,
   GetMyProfile,
+  EditeMyProfile,
 }

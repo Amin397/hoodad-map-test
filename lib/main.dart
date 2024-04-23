@@ -4,9 +4,8 @@ import 'package:get_storage/get_storage.dart';
 import 'package:untitled1/Utils/routs_utils.dart';
 
 void main()async{
+  await WidgetsFlutterBinding.ensureInitialized();
   await GetStorage.init();
-  WidgetsFlutterBinding.ensureInitialized();
-
   runApp(
     GetMaterialApp(
       debugShowCheckedModeBanner: false,
