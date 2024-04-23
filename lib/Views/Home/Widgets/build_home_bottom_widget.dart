@@ -35,22 +35,19 @@ class BuildHomeBottomWidget extends StatelessWidget {
         ),
         child: Column(
           children: [
-            _buildButtonsRow(
-              iconOne: mainFilterIcon,
+            _buildButtonsRow1(
               functionOne: () {
                 controller.switchFilterOn();
               },
-              iconTwo: 'assets/images/Icons/refreshIcon.svg',
-              functionTwo: () {
-
-              },
+              iconTwo: refreshIcon,
+              functionTwo: () {},
             ),
             _buildButtonsRow(
-              iconOne: 'assets/images/Icons/searchIcon.svg',
+              iconOne: searchIcon,
               functionOne: () {
                 controller.goToSearch();
               },
-              iconTwo: 'assets/images/Icons/currentLocationIcon.svg',
+              iconTwo: currentLocationIcon,
               functionTwo: () {},
             ),
             Expanded(
@@ -119,6 +116,80 @@ class BuildHomeBottomWidget extends StatelessWidget {
                   height: Get.width * .06,
                   width: Get.width * .06,
                 ),
+              ),
+            ),
+          ),
+          InkWell(
+            onTap: functionTwo,
+            child: Container(
+              height: Get.width * .12,
+              width: Get.width * .12,
+              decoration: BoxDecoration(
+                color: Colors.white,
+                boxShadow: shadow(),
+                borderRadius: radiusAll16,
+              ),
+              child: Center(
+                child: SvgPicture.asset(
+                  iconTwo,
+                  height: Get.width * .06,
+                  width: Get.width * .06,
+                ),
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildButtonsRow1({
+    required String iconTwo,
+    required GestureTapCallback functionOne,
+    required GestureTapCallback functionTwo,
+  }) {
+    return Container(
+      height: Get.height * .07,
+      width: Get.width,
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          InkWell(
+            onTap: functionOne,
+            child: Container(
+              height: Get.width * .12,
+              width: Get.width * .12,
+              decoration: BoxDecoration(
+                color: Colors.white,
+                boxShadow: shadow(),
+                borderRadius: radiusAll16,
+              ),
+              child: GetBuilder(
+                init: controller,
+                id: 'filterSwitch',
+                builder: (ctx) {
+                  return AnimatedSwitcher(
+                    duration: Duration(milliseconds: 50), // Animation duration
+                    transitionBuilder: (child, animation) {
+                      return ScaleTransition(
+                        scale: animation,
+                        child: child,
+                      );
+                    },
+                    child: (ctx.isFilterOn.isTrue)
+                        ? AnimatedIcon(
+                            icon: AnimatedIcons.menu_close,
+                            progress: ctx.animationController!,
+                          )
+                        : Center(
+                            child: SvgPicture.asset(
+                              mainFilterIcon,
+                              height: Get.width * .06,
+                              width: Get.width * .06,
+                            ),
+                          ),
+                  );
+                },
               ),
             ),
           ),

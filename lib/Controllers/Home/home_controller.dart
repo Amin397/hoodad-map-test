@@ -8,13 +8,16 @@ import 'package:permission_handler/permission_handler.dart';
 import 'package:untitled1/Models/Home/task_model.dart';
 import 'package:untitled1/Utils/routs_utils.dart';
 
-class HomeController extends GetxController {
+class HomeController extends GetxController with GetTickerProviderStateMixin {
   List<Location> originLocation = [];
   List<Location> destinationLocation = [];
   List<LatLng> routPoints = [];
 
   MapController mapController = MapController();
   Marker? currentLocation;
+
+  AnimationController? animationController;
+  bool isPlaying = false;
 
   Marker? originMarker;
   Marker? destinationMarker;
@@ -46,7 +49,16 @@ class HomeController extends GetxController {
   @override
   void onInit() {
     // updateLocation();
+
+    initData();
     super.onInit();
+  }
+
+  initData() async {
+    animationController = AnimationController(
+      vsync: this,
+      duration: Duration(milliseconds: 450),
+    );
   }
 
   Future<void> updateLocation() async {
@@ -84,7 +96,21 @@ class HomeController extends GetxController {
   }
 
   void switchFilterOn() {
-    isFilterOn(!isFilterOn.value);
+    isPlaying = !isPlaying;
+    isPlaying
+        ? animationController!.forward()
+        : animationController!.reverse();
+    // Future.delayed(const Duration(milliseconds: 100) , (){
+      if(isPlaying){
+        isFilterOn(!isFilterOn.value);
+        update(['filterSwitch']);
+      }else{
+        Future.delayed(const Duration(milliseconds: 300) , (){
+          isFilterOn(!isFilterOn.value);
+          update(['filterSwitch']);
+        });
+      }
+    // });
   }
 
   void selectTask({required TaskModel task}) {
@@ -93,16 +119,23 @@ class HomeController extends GetxController {
     }
     task.isSelected(true);
 
-    Future.delayed(const Duration(milliseconds: 500) , (){
+    Future.delayed(const Duration(milliseconds: 500), () {
       isFilterOn(false);
     });
   }
 
-  void goToSearch() async{
+  void goToSearch() async {
     Get.toNamed(NameRouts.search);
   }
 
-  void goToMenu() async{
+  void goToMenu() async {
     Get.toNamed(NameRouts.menu);
+  }
+
+
+  @override
+  void dispose() {
+    animationController!.dispose();
+    super.dispose();
   }
 }
