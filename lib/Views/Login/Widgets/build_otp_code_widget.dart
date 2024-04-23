@@ -89,17 +89,18 @@ class BuildOtpCodeWidget extends StatelessWidget {
             index: 3,
           ),
           Obx(
-            () => Align(
-              alignment: Alignment.centerRight,
-              child: Text(
-                (controller.hasError.isTrue)
-                    ? '.کد تایید وارد شده نادرست است'
-                    : '',
-                style: TextStyle(
-                  fontSize: 16.0,
-                  color: Colors.red,
+            () => animationConfig(
+              widget: Align(
+                alignment: Alignment.centerRight,
+                child: Text(
+                  (controller.hasError.isTrue) ? controller.pinErrorText : '',
+                  style: TextStyle(
+                    fontSize: 16.0,
+                    color: Colors.red,
+                  ),
                 ),
               ),
+              index: 2,
             ),
           ),
           Expanded(
@@ -167,7 +168,9 @@ class BuildOtpCodeWidget extends StatelessWidget {
                   () => (controller.secondsRemaining == 0)
                       ? TextButton(
                           onPressed: () {
-                            controller.startTimer();
+                            controller.sendOtpCode(
+                              isResend: true,
+                            );
                           },
                           child: Text(
                             'ارسال مجدد',
