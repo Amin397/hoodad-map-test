@@ -6,6 +6,7 @@ import 'package:untitled1/Consts/colors.dart';
 import 'package:untitled1/Consts/icons_path.dart';
 import 'package:untitled1/Consts/measures.dart';
 import 'package:untitled1/Controllers/Home/home_controller.dart';
+import 'package:untitled1/Utils/routs_utils.dart';
 import 'package:untitled1/Views/Home/Widgets/build_filter_widget.dart';
 import 'package:untitled1/Views/Home/Widgets/build_home_bottom_widget.dart';
 import 'package:untitled1/Views/Home/Widgets/build_map_widget.dart';
@@ -55,39 +56,76 @@ class HomeScreen extends StatelessWidget {
 
   Widget _buildTopWidgets() {
     return Align(
-      alignment: Alignment.topRight,
-      child: InkWell(
-        onTap: (){
-          controller.goToMenu();
-        },
-        child: Container(
-          margin: EdgeInsets.symmetric(
-            horizontal: Get.width * .05,
-            vertical: Get.height * .04,
-          ),
-          width: Get.width * .15,
-          height: Get.width * .15,
-          decoration: BoxDecoration(
-            shape: BoxShape.circle,
-            boxShadow: shadow(),
-            color: Colors.white,
-            border: Border.all(
-              color: Colors.white,
-              width: 2.0,
-            ),
-          ),
-          child: Center(
-            child: ClipRRect(
-              borderRadius: radiusAll100,
-              child: Image.asset(
-                avatarLogo,
-                fit: BoxFit.cover,
-                width: Get.width * .15,
-                height: Get.width * .15,
+      alignment: Alignment.topCenter,
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          InkWell(
+            onTap: (){
+              controller.goToMenu();
+            },
+            child: Container(
+              margin: EdgeInsets.symmetric(
+                horizontal: Get.width * .05,
+                vertical: Get.height * .04,
+              ),
+              width: Get.width * .12,
+              height: Get.width * .12,
+              decoration: BoxDecoration(
+                shape: BoxShape.circle,
+                boxShadow: shadow(),
+                color: Colors.white,
+                border: Border.all(
+                  color: Colors.white,
+                  width: 2.0,
+                ),
+              ),
+              child: Center(
+                child: SvgPicture.asset(
+                  menuIcon,
+                  height: Get.width * .06,
+                  width: Get.width * .06,
+                ),
               ),
             ),
           ),
-        ),
+          InkWell(
+            onTap: (){
+              Get.toNamed(NameRouts.profile);
+            },
+            child: Container(
+              margin: EdgeInsets.symmetric(
+                horizontal: Get.width * .05,
+                vertical: Get.height * .04,
+              ),
+              width: Get.width * .15,
+              height: Get.width * .15,
+              decoration: BoxDecoration(
+                shape: BoxShape.circle,
+                boxShadow: shadow(),
+                color: Colors.white,
+                border: Border.all(
+                  color: Colors.white,
+                  width: 2.0,
+                ),
+              ),
+              child: Center(
+                child: Hero(
+                  tag: 'ProfilePicture',
+                  child: ClipRRect(
+                    borderRadius: radiusAll100,
+                    child: Image.asset(
+                      avatarLogo,
+                      fit: BoxFit.cover,
+                      width: Get.width * .15,
+                      height: Get.width * .15,
+                    ),
+                  ),
+                ),
+              ),
+            ),
+          ),
+        ],
       ),
     );
   }
