@@ -63,45 +63,53 @@ class LoginController extends GetxController {
   }
 
   void sendOtpCode({required bool isResend}) async {
-    FocusManager.instance.primaryFocus?.unfocus();
-    errorText('');
-    showLoadingAlert();
-    requests
-        .sendOtpCode(
-      phoneNumber: phoneNumberTextController!.text,
-    )
-        .then((value) {
-      Get.back();
-      Map<String, dynamic> apiResult = jsonDecode(value!.body);
+    if (phoneNumberTextController!.text.length < 11) {
+      showErrorSnakeBar(
+        body: 'لطفا شماره تلفن را کامل وارد کنید',
+      );
+      errorText.value = 'لطفا شماره تلفن را کامل وارد کنید';
+      numberErrorKey.currentState!.shake();
+    } else {
+      FocusManager.instance.primaryFocus?.unfocus();
+      errorText('');
+      showLoadingAlert();
+      requests
+          .sendOtpCode(
+        phoneNumber: phoneNumberTextController!.text,
+      )
+          .then((value) {
+        Get.back();
+        Map<String, dynamic> apiResult = jsonDecode(value!.body);
 
-      if (apiResult['errorCode'] == null) {
-        errorText.value = '';
-        otpId = apiResult['result']['otpId'];
-        userId = apiResult['result']['userId'];
-        pinCodeTextController!.clear();
-        if (!isResend) {
-          isNumberEntered = true;
-        }
-        startTimer();
-        showSuccessSnakeBar(
-          body: 'کد تایید برای شما ارسال شد',
-        );
-        update(['loginSwitcher']);
-      } else {
-        errorText.value = errorList
-            .singleWhere((element) => element.code == apiResult['errorCode'])
-            .message;
-
-        Future.delayed(const Duration(milliseconds: 400), () {
+        if (apiResult['errorCode'] == null) {
+          errorText.value = '';
+          otpId = apiResult['result']['otpId'];
+          userId = apiResult['result']['userId'];
+          pinCodeTextController!.clear();
           if (!isResend) {
-            numberErrorKey.currentState!.shake();
+            isNumberEntered = true;
           }
-        });
-        showErrorSnakeBar(
-          body: errorText.value,
-        );
-      }
-    });
+          startTimer();
+          showSuccessSnakeBar(
+            body: 'کد تایید برای شما ارسال شد',
+          );
+          update(['loginSwitcher']);
+        } else {
+          errorText.value = errorList
+              .singleWhere((element) => element.code == apiResult['errorCode'])
+              .message;
+
+          Future.delayed(const Duration(milliseconds: 400), () {
+            if (!isResend) {
+              numberErrorKey.currentState!.shake();
+            }
+          });
+          showErrorSnakeBar(
+            body: errorText.value,
+          );
+        }
+      });
+    }
   }
 
   @override

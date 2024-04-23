@@ -49,8 +49,24 @@ class EditProfileScreen extends StatelessWidget {
                       ),
                       animationConfig(
                         widget: filledTextField(
-                          controller: controller.fullNameTextController,
-                          label: 'نام و نام خانوادگی',
+                          controller: controller.firstNameTextController,
+                          label: 'نام',
+                          textStyle: TextStyle(
+                            fontSize: 18.0,
+                            color: searchBorderColor,
+                          ),
+                          textAlign: TextAlign.right,
+                          maxLine: 1,
+                        ),
+                        index: 2,
+                      ),
+                      SizedBox(
+                        height: Get.height * .03,
+                      ),
+                      animationConfig(
+                        widget: filledTextField(
+                          controller: controller.lastNameTextController,
+                          label: 'نام خانوادگی',
                           textStyle: TextStyle(
                             fontSize: 18.0,
                             color: searchBorderColor,
@@ -232,7 +248,7 @@ class EditProfileScreen extends StatelessWidget {
                         ),
                       ),
                       Radio(
-                        value: 0,
+                        value: 1,
                         groupValue: ctx.genderGroupValue,
                         onChanged: (value) {
                           controller.selectGender(value: value!);
@@ -267,7 +283,7 @@ class EditProfileScreen extends StatelessWidget {
                         ),
                       ),
                       Radio(
-                        value: 1,
+                        value: 0,
                         groupValue: ctx.genderGroupValue,
                         onChanged: (value) {
                           controller.selectGender(value: value!);
@@ -286,23 +302,28 @@ class EditProfileScreen extends StatelessWidget {
   }
 
   Widget _buildSaveButton() {
-    return Container(
-      width: Get.width,
-      height: Get.height * .06,
-      decoration: BoxDecoration(
-        color: mainColor,
-        borderRadius: radiusAll16,
-        boxShadow: shadow(),
-      ),
-      child: Center(
-        child: AutoSizeText(
-          'ذخیره',
-          maxFontSize: 26.0,
-          minFontSize: 20.0,
-          maxLines: 1,
-          style: TextStyle(
-            color: titleTextColor,
-            fontWeight: FontWeight.bold,
+    return InkWell(
+      onTap: (){
+        controller.saveEditProfile();
+      },
+      child: Container(
+        width: Get.width * .9,
+        height: Get.height * .06,
+        decoration: BoxDecoration(
+          color: mainColor,
+          borderRadius: radiusAll16,
+          boxShadow: shadow(),
+        ),
+        child: Center(
+          child: AutoSizeText(
+            'ذخیره',
+            maxFontSize: 26.0,
+            minFontSize: 20.0,
+            maxLines: 1,
+            style: TextStyle(
+              color: titleTextColor,
+              fontWeight: FontWeight.bold,
+            ),
           ),
         ),
       ),

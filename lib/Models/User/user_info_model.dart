@@ -1,51 +1,55 @@
 class UserInfoModel {
+  int? vehicleType;
+  String? plateNumber;
+  String? nationalCardImage;
   int? id;
-  String? code;
-  String? imei;
+  String? name;
+  String? family;
+  String? nationalCode;
+  String? mobile;
+  int? roleId;
   int? status;
-  int? battery;
-  int? lat;
-  int? lng;
-  String? simNumber;
-  String? model;
-  dynamic serialNumber;
+  int? gender;
 
   UserInfoModel({
+    this.vehicleType,
+    this.plateNumber,
+    this.nationalCardImage,
     this.id,
-    this.code,
-    this.imei,
+    this.name,
+    this.family,
+    this.nationalCode,
+    this.mobile,
+    this.roleId,
     this.status,
-    this.battery,
-    this.lat,
-    this.lng,
-    this.simNumber,
-    this.model,
-    this.serialNumber,
+    this.gender,
   });
 
   factory UserInfoModel.fromJson(Map<String, dynamic> json) => UserInfoModel(
+    vehicleType: json["vehicleType"],
+    plateNumber: json["plateNumber"],
+    nationalCardImage: json["nationalCardImage"],
     id: json["id"],
-    code: json["code"],
-    imei: json["imei"],
+    name: json["name"],
+    family: json["family"],
+    nationalCode: json["nationalCode"],
+    mobile: json["mobile"],
+    roleId: json["roleId"],
     status: json["status"],
-    battery: json["battery"],
-    lat: json["lat"],
-    lng: json["lng"],
-    simNumber: json["simNumber"],
-    model: json["model"],
-    serialNumber: json["serialNumber"],
+    gender: json["gender"],
   );
 
   Map<String, dynamic> toJson() => {
+    "vehicleType": vehicleType,
+    "plateNumber": plateNumber,
+    "nationalCardImage": nationalCardImage,
     "id": id,
-    "code": code,
-    "imei": imei,
+    "name": name,
+    "family": family,
+    "nationalCode": nationalCode,
+    "mobile": mobile,
+    "roleId": roleId,
     "status": status,
-    "battery": battery,
-    "lat": lat,
-    "lng": lng,
-    "simNumber": simNumber,
-    "model": model,
-    "serialNumber": serialNumber,
+    "gender": gender,
   };
 }
