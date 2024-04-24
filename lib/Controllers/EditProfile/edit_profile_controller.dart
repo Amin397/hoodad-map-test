@@ -1,12 +1,15 @@
 import 'dart:convert';
+import 'dart:io';
 
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:untitled1/Blocs/blocs_utils.dart';
 import 'package:untitled1/Consts/error_code.dart';
 import 'package:untitled1/Models/User/user_info_model.dart';
 import 'package:untitled1/Utils/API/project_requests_utils.dart';
 import 'package:untitled1/Utils/view_utils.dart';
+import 'package:untitled1/Utils/widget_utils.dart';
 
 class EditProfileController extends GetxController {
   TextEditingController firstNameTextController = TextEditingController();
@@ -16,6 +19,9 @@ class EditProfileController extends GetxController {
   TextEditingController emailTextController = TextEditingController();
 
   ProjectRequestsUtils requests = ProjectRequestsUtils();
+
+  bool hasImage = false;
+  XFile? pickedImage;
 
   int? genderGroupValue;
 
@@ -46,6 +52,7 @@ class EditProfileController extends GetxController {
       family: lastNameTextController.text,
       email: emailTextController.text,
       gender: genderGroupValue!,
+      image: (pickedImage is XFile) ? File(pickedImage!.path) : null,
     )
         .then(
       (value) async {
@@ -82,5 +89,27 @@ class EditProfileController extends GetxController {
         );
       }
     });
+  }
+
+  void openImageModal() async {
+    FocusManager.instance.primaryFocus?.unfocus();
+    var result = await myImageModal(
+      context: Get.context!,
+      // hasImage: hasImage,
+    );
+
+    if (result is int) {
+      _deleteImage();
+    } else {
+      pickedImage = result;
+      // await uploadImage();
+    }
+
+    update(['personalAvatar']);
+  }
+
+  void _deleteImage() {
+    hasImage = false;
+    update(['personalAvatar']);
   }
 }
