@@ -1,5 +1,3 @@
-import 'package:get/get.dart';
-
 class IncomesModel {
   int id;
   int status;

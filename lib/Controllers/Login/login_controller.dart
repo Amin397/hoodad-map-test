@@ -4,7 +4,6 @@ import 'dart:convert';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:pin_code_fields/pin_code_fields.dart';
 import 'package:untitled1/Consts/error_code.dart';
 import 'package:untitled1/Utils/API/project_requests_utils.dart';
 import 'package:untitled1/Utils/routs_utils.dart';

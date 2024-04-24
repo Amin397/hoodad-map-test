@@ -18,6 +18,7 @@ class BuildMapWidget extends StatelessWidget {
       width: Get.width,
       child: GetBuilder(
         init: controller,
+        id: 'mapUpdate',
         builder: (ctx){
           return FlutterMap(
             options: MapOptions(
@@ -51,14 +52,14 @@ class BuildMapWidget extends StatelessWidget {
                     ),
                   ],
                 ),
-              if (ctx.originMarker is Marker)
-                MarkerLayer(
-                  markers: [ctx.originMarker!],
-                ),
-              if (ctx.destinationMarker is Marker)
-                MarkerLayer(
-                  markers: [ctx.destinationMarker!],
-                ),
+              // if (ctx.originMarker is Marker)
+              //   MarkerLayer(
+              //     markers: [ctx.originMarker!],
+              //   ),
+              // if (ctx.destinationMarker is Marker)
+              //   MarkerLayer(
+              //     markers: [ctx.destinationMarker!],
+              //   ),
               MarkerLayer(
                 markers: ctx.markerList,
               ),

@@ -3,7 +3,6 @@ import 'package:get/get.dart';
 import 'package:untitled1/Consts/colors.dart';
 import 'package:untitled1/Consts/measures.dart';
 import 'package:untitled1/Controllers/MapSearch/map_search_controller.dart';
-import 'package:untitled1/Utils/view_utils.dart';
 import 'package:untitled1/Utils/widget_utils.dart';
 import 'package:untitled1/Views/MapSearch/Widgets/build_map_search_list_widget.dart';
 import 'package:untitled1/Views/MapSearch/Widgets/build_stared_station_widget.dart';

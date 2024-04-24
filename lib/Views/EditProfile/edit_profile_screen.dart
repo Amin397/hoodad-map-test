@@ -1,11 +1,7 @@
 import 'package:auto_size_text/auto_size_text.dart';
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
-import 'package:lottie/lottie.dart';
-import 'package:untitled1/Blocs/blocs_utils.dart';
 import 'package:untitled1/Consts/colors.dart';
 import 'package:untitled1/Consts/icons_path.dart';
 import 'package:untitled1/Consts/measures.dart';

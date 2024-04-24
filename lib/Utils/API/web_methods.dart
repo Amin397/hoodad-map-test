@@ -4,4 +4,5 @@ enum WebMethods {
   GenerateTaalBaanToken,
   GetMyProfile,
   EditeMyProfile,
+  GetDefectiveScooters,
 }

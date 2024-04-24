@@ -11,6 +11,8 @@ String searchIcon = 'assets/images/Icons/searchIcon.svg';
 String menuIcon = 'assets/images/Icons/menuIcon.svg';
 String currentLocationIcon = 'assets/images/Icons/currentLocationIcon.svg';
 String unlockIcon = 'assets/images/Icons/unlockIcon.svg';
+String movementMarkerIcon = 'assets/images/Icons/movementIcon.svg';
+String chargeMarkerIcon = 'assets/images/Icons/sharg.svg';
 
 
 
