@@ -1,11 +1,9 @@
 import 'dart:convert';
 import 'dart:math';
-
 import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:get/get.dart';
 import 'package:permission_handler/permission_handler.dart';
-import 'package:units_converter/units_converter.dart';
 import 'package:latlong2/latlong.dart';
 import 'package:geocoding/geocoding.dart';
 import 'package:flutter_map/flutter_map.dart';

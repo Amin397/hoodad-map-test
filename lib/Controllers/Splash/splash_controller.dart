@@ -1,8 +1,7 @@
 import 'dart:async';
 import 'dart:convert';
-
 import 'package:get/get.dart';
-import 'package:get_storage/get_storage.dart';
+import 'package:permission_handler/permission_handler.dart';
 import 'package:untitled1/Blocs/blocs_utils.dart';
 import 'package:untitled1/Models/User/user_info_model.dart';
 import 'package:untitled1/Utils/API/project_requests_utils.dart';
@@ -53,13 +52,14 @@ class SplashController extends GetxController {
         }
       }
     });
-
     checkUserExist();
-    // Future.delayed(const Duration(seconds: 7), () {
-    // });
   }
 
   Future<void> checkUserExist() async {
+    if (!await Permission.location.status.isGranted) {
+      await Permission.location.request();
+    }
+
     StorageUtils.getToken().then((value) {
       if (value is String) {
         getUserInfo();

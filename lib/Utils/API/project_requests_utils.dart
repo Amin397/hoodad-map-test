@@ -45,6 +45,32 @@ class ProjectRequestsUtils extends BaseHttpRequest {
     );
   }
 
+  Future<http.Response?> getMapScooters({
+    required String lat,
+    required String lng,
+    int? type,
+  }) async {
+    return await makeHttpRequest(
+      webController: WebController.TaalBaanScooter,
+      webMethod: WebMethods.GetDefectiveScooters,
+      type: 'post',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer ' + await StorageUtils.getToken(),
+      },
+      body: (type is int)
+          ? {
+              'lat': lat,
+              'lng': lng,
+              'type': type,
+            }
+          : {
+              'lat': lat,
+              'lng': lng,
+            },
+    );
+  }
+
   Future<http.Response?> generateToken({
     required String otpId,
     required String otpCode,
@@ -84,7 +110,7 @@ class ProjectRequestsUtils extends BaseHttpRequest {
     required int gender,
     File? image,
   }) async {
-    if(image is File){
+    if (image is File) {
       return await makeFileHttpRequest(
         webController: WebController.TaalBaanUser,
         webMethod: WebMethods.EditeMyProfile,
@@ -104,11 +130,11 @@ class ProjectRequestsUtils extends BaseHttpRequest {
             'Image',
             await image.readAsBytes(),
             filename:
-            '${Blocs.infoBloc.info!.name}_${Blocs.infoBloc.info!.family}.jpg',
+                '${Blocs.infoBloc.info!.name}_${Blocs.infoBloc.info!.family}.jpg',
           ),
         ],
       );
-    }else{
+    } else {
       return await makeFileHttpRequest(
         webController: WebController.TaalBaanUser,
         webMethod: WebMethods.EditeMyProfile,
