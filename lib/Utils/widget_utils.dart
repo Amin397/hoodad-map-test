@@ -2,8 +2,10 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:get/get.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:untitled1/Consts/colors.dart';
 import 'package:untitled1/Consts/measures.dart';
+import 'package:untitled1/Views/EditProfile/Widgets/build_pick_image_modal.dart';
 
 Widget animationConfig({
   required Widget widget,
@@ -134,3 +136,46 @@ Widget filledTextField({
     ),
   );
 }
+
+
+Future<dynamic> myImageModal({
+  required BuildContext context,
+}) async {
+  final ImagePicker picker = ImagePicker();
+
+  int chooseImage = await showModalBottomSheet(
+    context: context,
+    isDismissible: false,
+    backgroundColor: Colors.transparent,
+    elevation: .5,
+    builder: (BuildContext context) {
+      return BuildPickImageModal(
+      );
+    },
+  );
+
+  switch (chooseImage) {
+    case 0:
+      {
+        return await picker.pickImage(
+          source: ImageSource.gallery,
+        );
+      }
+    case 1:
+      {
+        return await picker.pickImage(
+          source: ImageSource.camera,
+        );
+      }
+    case 2:
+      {
+        return 2;
+      }
+    case 3:
+      {
+        return 3;
+      }
+  }
+}
+
+

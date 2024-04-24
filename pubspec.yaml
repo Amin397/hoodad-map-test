@@ -54,8 +54,8 @@ dependencies:
   persian_number_utility: ^1.1.4
   dotted_border: ^2.1.0
   connectivity_plus: ^6.0.3
-
-
+  image_picker: ^1.1.0
+  cached_network_image: ^3.3.1
 
 
 

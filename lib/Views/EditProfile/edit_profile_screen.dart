@@ -1,8 +1,11 @@
 import 'package:auto_size_text/auto_size_text.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
+import 'package:lottie/lottie.dart';
+import 'package:untitled1/Blocs/blocs_utils.dart';
 import 'package:untitled1/Consts/colors.dart';
 import 'package:untitled1/Consts/icons_path.dart';
 import 'package:untitled1/Consts/measures.dart';
@@ -161,27 +164,27 @@ class EditProfileScreen extends StatelessWidget {
     return Container(
       width: Get.width * .4,
       height: Get.width * .4,
-      child: Stack(
-        children: [
-          SizedBox(
-            width: Get.width * .4,
-            height: Get.width * .4,
-            child: CircularProgressIndicator(
-              value: .65,
-              strokeWidth: 3.0,
-              valueColor: AlwaysStoppedAnimation<Color>(
-                avatarBorderColor,
+      child: InkWell(
+        onTap: () {
+          controller.openImageModal();
+        },
+        customBorder: RoundedRectangleBorder(
+          borderRadius: radiusAll80,
+        ),
+        child: Stack(
+          children: [
+            SizedBox(
+              width: Get.width * .4,
+              height: Get.width * .4,
+              child: CircularProgressIndicator(
+                value: .65,
+                strokeWidth: 3.0,
+                valueColor: AlwaysStoppedAnimation<Color>(
+                  avatarBorderColor,
+                ),
               ),
             ),
-          ),
-          Center(
-            child: InkWell(
-              onTap: () {
-                // controller.startAnimation();
-              },
-              customBorder: RoundedRectangleBorder(
-                borderRadius: radiusAll80,
-              ),
+            Center(
               child: ClipRRect(
                 borderRadius: radiusAll100,
                 child: Image.asset(
@@ -191,28 +194,34 @@ class EditProfileScreen extends StatelessWidget {
                   height: Get.width * .38,
                 ),
               ),
+              // child: ClipRRect(
+              //   borderRadius: radiusAll100,
+              //   child: Image.asset(
+              //     fit: BoxFit.cover,
+              //   ),
+              // ),
             ),
-          ),
-          Align(
-            alignment: Alignment.bottomLeft,
-            child: Container(
-              height: Get.width * .11,
-              width: Get.width * .11,
-              decoration: BoxDecoration(
-                shape: BoxShape.circle,
-                color: mainColor,
-                boxShadow: shadow(),
-              ),
-              child: Center(
-                child: SvgPicture.asset(
-                  cameraIcon,
-                  height: Get.width * .055,
-                  width: Get.width * .055,
+            Align(
+              alignment: Alignment.bottomLeft,
+              child: Container(
+                height: Get.width * .11,
+                width: Get.width * .11,
+                decoration: BoxDecoration(
+                  shape: BoxShape.circle,
+                  color: mainColor,
+                  boxShadow: shadow(),
+                ),
+                child: Center(
+                  child: SvgPicture.asset(
+                    cameraIcon,
+                    height: Get.width * .055,
+                    width: Get.width * .055,
+                  ),
                 ),
               ),
-            ),
-          )
-        ],
+            )
+          ],
+        ),
       ),
     );
   }
@@ -303,7 +312,7 @@ class EditProfileScreen extends StatelessWidget {
 
   Widget _buildSaveButton() {
     return InkWell(
-      onTap: (){
+      onTap: () {
         controller.saveEditProfile();
       },
       child: Container(
@@ -330,3 +339,30 @@ class EditProfileScreen extends StatelessWidget {
     );
   }
 }
+
+
+
+// child: (Blocs.infoBloc.info!.user!.avatar is String &&
+// Blocs.infoBloc.info!.user!.avatar!.length > 3)
+// ? ClipRRect(
+// borderRadius: radiusAll100,
+// child: CachedNetworkImage(
+// imageUrl: BaseHttpRequest.baseFileRequestUrl +
+// '/' +
+// Blocs.infoBloc.info!.!.avatar!,
+// fit: BoxFit.cover,
+// placeholder: (context, url) => Lottie.asset(
+// 'assets/anims/imageLoading.json',
+// ),
+// ),
+// )
+//     : Center(
+// child: ClipRRect(
+// borderRadius: radiusAll100,
+// child: Image.asset(
+// avatarLogo,
+// width: Get.width * .38,
+// height: Get.width * .38,
+// ),
+// ),
+// ),
