@@ -1,4 +1,7 @@
+import 'dart:io';
+
 import 'package:http/http.dart' as http;
+import 'package:untitled1/Blocs/blocs_utils.dart';
 import 'package:untitled1/Utils/API/web_controllers.dart';
 import 'package:untitled1/Utils/API/web_methods.dart';
 import 'package:untitled1/Utils/storage_utils.dart';
@@ -77,25 +80,51 @@ class ProjectRequestsUtils extends BaseHttpRequest {
   Future<http.Response?> editProfile({
     required String name,
     required String family,
-    required String email,
+    String? email,
     required int gender,
-    String? image,
+    File? image,
   }) async {
-    return await makeHttpRequest(
-      webController: WebController.TaalBaanUser,
-      webMethod: WebMethods.EditeMyProfile,
-      type: 'post',
-      headers: {
-        'Authorization': 'Bearer ' + await StorageUtils.getToken(),
-        'Content-Type': 'multipart/form-data',
-      },
-      body: {
-        'Name': name,
-        'Family': family,
-        'Gender': gender,
-        'Email': email,
-        'Image': image,
-      },
-    );
+    if(image is File){
+      return await makeFileHttpRequest(
+        webController: WebController.TaalBaanUser,
+        webMethod: WebMethods.EditeMyProfile,
+        type: 'post',
+        headers: {
+          'Content-Type': 'multipart/form-data',
+          'Authorization': 'Bearer ' + await StorageUtils.getToken(),
+        },
+        fields: {
+          'Name': name,
+          'Family': family,
+          'Gender': gender.toString(),
+          'Email': email ?? '',
+        },
+        files: <http.MultipartFile>[
+          http.MultipartFile.fromBytes(
+            'Image',
+            await image.readAsBytes(),
+            filename:
+            '${Blocs.infoBloc.info!.name}_${Blocs.infoBloc.info!.family}.jpg',
+          ),
+        ],
+      );
+    }else{
+      return await makeFileHttpRequest(
+        webController: WebController.TaalBaanUser,
+        webMethod: WebMethods.EditeMyProfile,
+        type: 'post',
+        headers: {
+          'Content-Type': 'multipart/form-data',
+          'Authorization': 'Bearer ' + await StorageUtils.getToken(),
+        },
+        fields: {
+          'Name': name,
+          'Family': family,
+          'Gender': gender.toString(),
+          'Email': email ?? '',
+        },
+        files: null,
+      );
+    }
   }
 }

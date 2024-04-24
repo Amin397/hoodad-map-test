@@ -248,7 +248,7 @@ class EditProfileScreen extends StatelessWidget {
                         ),
                       ),
                       Radio(
-                        value: 1,
+                        value: 2,
                         groupValue: ctx.genderGroupValue,
                         onChanged: (value) {
                           controller.selectGender(value: value!);
@@ -283,7 +283,7 @@ class EditProfileScreen extends StatelessWidget {
                         ),
                       ),
                       Radio(
-                        value: 0,
+                        value: 1,
                         groupValue: ctx.genderGroupValue,
                         onChanged: (value) {
                           controller.selectGender(value: value!);

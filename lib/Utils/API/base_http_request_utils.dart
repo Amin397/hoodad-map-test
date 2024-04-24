@@ -181,10 +181,11 @@ class BaseHttpRequest {
     WebController? webController,
     WebController? optionalWebMethod,
     WebController? optionalWebController,
-    String headers = '',
+    Map<String, String>? headers,
+    Map<String, String>? fields,
+    List<http.MultipartFile>? files,
     required String type,
     String? pathVariable,
-    String? filePath,
     Map<String, dynamic>? queryParameters,
   }) async {
     late http.MultipartRequest request;
@@ -216,13 +217,14 @@ class BaseHttpRequest {
             type.toUpperCase(),
             pathUri,
           );
-          request.headers['Authorization'] = headers;
-          request.files.add(
-            await http.MultipartFile.fromPath(
-              'image',
-              filePath!,
-            ),
-          );
+          request.headers.addAll(headers!);
+          if(fields!.isNotEmpty){
+            request.fields.addAll(fields);
+          }
+
+          if(files != null){
+            request.files.addAll(files);
+          }
 
           try {
             response1 = await request.send();
@@ -234,23 +236,23 @@ class BaseHttpRequest {
         }
       case 'put':
         {
-          request = http.MultipartRequest(
-            type.toUpperCase(),
-            pathUri,
-          );
-          request.headers['Authorization'] = headers;
-          request.files.add(
-            await http.MultipartFile.fromPath(
-              'profile_picture',
-              filePath!,
-            ),
-          );
-          try {
-            response1 = await request.send();
-            response = await http.Response.fromStream(response1);
-          } catch (e) {
-            print(e);
-          }
+          // request = http.MultipartRequest(
+          //   type.toUpperCase(),
+          //   pathUri,
+          // );
+          // request.headers['Authorization'] = headers;
+          // request.files.add(
+          //   await http.MultipartFile.fromPath(
+          //     'profile_picture',
+          //     filePath!,
+          //   ),
+          // );
+          // try {
+          //   response1 = await request.send();
+          //   response = await http.Response.fromStream(response1);
+          // } catch (e) {
+          //   print(e);
+          // }
           break;
         }
       case 'patch':
