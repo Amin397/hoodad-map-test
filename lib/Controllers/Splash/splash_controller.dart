@@ -81,7 +81,7 @@ class SplashController extends GetxController {
             apiResult['result'],
           ),
         );
-        Future.delayed(const Duration(seconds: 7), () {
+        Future.delayed(const Duration(seconds: 3), () {
           Get.offAllNamed(NameRouts.home);
           Get.delete<SplashController>();
         });

@@ -4,7 +4,9 @@ import 'dart:convert';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:untitled1/Blocs/blocs_utils.dart';
 import 'package:untitled1/Consts/error_code.dart';
+import 'package:untitled1/Models/User/user_info_model.dart';
 import 'package:untitled1/Utils/API/project_requests_utils.dart';
 import 'package:untitled1/Utils/routs_utils.dart';
 import 'package:untitled1/Utils/shake_animation_utils.dart';
@@ -177,7 +179,7 @@ class LoginController extends GetxController {
       userId: userId!,
       otpCode: pinCodeTextController!.text,
     )
-        .then((value) {
+        .then((value) async{
       hasError(false);
       Get.back();
 
@@ -186,6 +188,22 @@ class LoginController extends GetxController {
         StorageUtils.setToken(token: apiResult['result']['token']);
         showSuccessSnakeBar(
           body: 'با موفقیت وارد شدی',
+        );
+        await getUserInfo();
+
+      }
+    });
+  }
+
+  Future<void> getUserInfo() async {
+    requests.getUserInfo().then((value) async {
+      Map<String, dynamic> apiResult = jsonDecode(value!.body);
+
+      if (apiResult['errorCode'] == null) {
+        Blocs.infoBloc.setData(
+          infoData: UserInfoModel.fromJson(
+            apiResult['result'],
+          ),
         );
         Future.delayed(const Duration(seconds: 4), () {
           Get.offAllNamed(NameRouts.home);

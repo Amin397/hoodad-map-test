@@ -47,7 +47,9 @@ class BuildHomeBottomWidget extends StatelessWidget {
                 controller.goToSearch();
               },
               iconTwo: currentLocationIcon,
-              functionTwo: () {},
+              functionTwo: () {
+                controller.updateLocation();
+              },
             ),
             Expanded(
               child: Align(
