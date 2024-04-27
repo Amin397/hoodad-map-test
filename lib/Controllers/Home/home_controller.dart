@@ -79,30 +79,34 @@ class HomeController extends GetxController with GetTickerProviderStateMixin {
   }
 
   _getCurrentLocation() {
-    Geolocator.getCurrentPosition(
-      desiredAccuracy: LocationAccuracy.best,
-      forceAndroidLocationManager: true,
-    ).then((Position position) async {
-      currentLocation = Marker(
-        point: LatLng(
-          position.latitude,
-          position.longitude,
-        ),
-        child: const Icon(
-          Icons.my_location_outlined,
-          color: Colors.red,
-        ),
-        alignment: Alignment.topCenter,
-      );
-
+    if(currentLocation is Marker){
       mapController.moveAndRotate(currentLocation!.point, 17, 3.0);
-      await getScootersMarker();
-      Future.delayed(const Duration(milliseconds: 500), () {
-        update(['mapUpdate']);
+    }else{
+      Geolocator.getCurrentPosition(
+        desiredAccuracy: LocationAccuracy.best,
+        forceAndroidLocationManager: true,
+      ).then((Position position) async {
+        currentLocation = Marker(
+          point: LatLng(
+            position.latitude,
+            position.longitude,
+          ),
+          child: const Icon(
+            Icons.my_location_outlined,
+            color: Colors.red,
+          ),
+          alignment: Alignment.topCenter,
+        );
+
+        mapController.moveAndRotate(currentLocation!.point, 17, 3.0);
+        await getScootersMarker();
+        Future.delayed(const Duration(milliseconds: 500), () {
+          update(['mapUpdate']);
+        });
+      }).catchError((e) {
+        print(e);
       });
-    }).catchError((e) {
-      print(e);
-    });
+    }
   }
 
   void switchFilterOn() {

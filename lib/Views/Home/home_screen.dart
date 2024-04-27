@@ -1,9 +1,13 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
+import 'package:lottie/lottie.dart';
+import 'package:untitled1/Blocs/blocs_utils.dart';
 import 'package:untitled1/Consts/icons_path.dart';
 import 'package:untitled1/Consts/measures.dart';
 import 'package:untitled1/Controllers/Home/home_controller.dart';
+import 'package:untitled1/Utils/API/base_http_request_utils.dart';
 import 'package:untitled1/Utils/routs_utils.dart';
 import 'package:untitled1/Views/Home/Widgets/build_filter_widget.dart';
 import 'package:untitled1/Views/Home/Widgets/build_home_bottom_widget.dart';
@@ -110,14 +114,36 @@ class HomeScreen extends StatelessWidget {
               child: Center(
                 child: Hero(
                   tag: 'ProfilePicture',
-                  child: ClipRRect(
-                    borderRadius: radiusAll100,
-                    child: Image.asset(
-                      avatarLogo,
-                      fit: BoxFit.cover,
-                      width: Get.width * .15,
-                      height: Get.width * .15,
-                    ),
+                  child: StreamBuilder(
+                    stream: Blocs.infoBloc.getStream,
+                    builder: (c, x) {
+                      return Center(
+                        child: (Blocs.infoBloc.info!.nationalCardImage is String &&
+                            Blocs.infoBloc.info!.nationalCardImage!.length > 3)
+                            ? ClipRRect(
+                          borderRadius: radiusAll100,
+                          child: CachedNetworkImage(
+                            imageUrl: BaseHttpRequest.baseFileRequestUrl +
+                                '/' +
+                                Blocs.infoBloc.info!.nationalCardImage!,
+                            fit: BoxFit.cover,
+                            placeholder: (context, url) => Lottie.asset(
+                              'assets/anims/imageLoading.json',
+                            ),
+                            width: Get.width * .15,
+                            height: Get.width * .15,
+                          ),
+                        )
+                            : ClipRRect(
+                          borderRadius: radiusAll100,
+                          child: Image.asset(
+                            avatarLogo,
+                            width: Get.width * .15,
+                            height: Get.width * .15,
+                          ),
+                        ),
+                      );
+                    },
                   ),
                 ),
               ),
@@ -128,3 +154,5 @@ class HomeScreen extends StatelessWidget {
     );
   }
 }
+
+

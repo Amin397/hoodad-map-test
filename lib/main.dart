@@ -7,11 +7,20 @@ void main()async{
   await WidgetsFlutterBinding.ensureInitialized();
   await GetStorage.init();
   runApp(
-    GetMaterialApp(
+    RunStartApp()
+  );
+}
+
+
+class RunStartApp extends StatelessWidget {
+  const RunStartApp({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return GetMaterialApp(
       debugShowCheckedModeBanner: false,
       getPages: PageRout.pages,
       initialRoute: NameRouts.splash,
-      // home: SplashScreen(),
       title: 'TaalBaan',
       theme: ThemeData(
         fontFamily: 'Yekan',
@@ -25,6 +34,6 @@ void main()async{
           iconColor: Colors.black,
         ),
       ),
-    ),
-  );
+    );
+  }
 }

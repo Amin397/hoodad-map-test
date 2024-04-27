@@ -14,7 +14,7 @@ class BaseHttpRequest {
 
   static String token = 'test';
   static String baseRequestUrl = 'https://taalnewapi.hoodadtechnology.ir/api';
-  static String baseFileRequestUrl = 'https://my.toppoints.ca/storage/';
+  static String baseFileRequestUrl = 'https://cdn.hoodadtechnology.ir/taal/';
 
   Future<http.Response?> makeHttpRequest({
     WebMethods? webMethod,
