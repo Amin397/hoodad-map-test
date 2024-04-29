@@ -11,6 +11,7 @@ import 'package:untitled1/Utils/API/base_http_request_utils.dart';
 import 'package:untitled1/Utils/routs_utils.dart';
 import 'package:untitled1/Views/Home/Widgets/build_filter_widget.dart';
 import 'package:untitled1/Views/Home/Widgets/build_home_bottom_widget.dart';
+import 'package:untitled1/Views/Home/Widgets/build_home_top_widget.dart';
 import 'package:untitled1/Views/Home/Widgets/build_map_widget.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -33,7 +34,9 @@ class HomeScreen extends StatelessWidget {
             BuildHomeBottomWidget(
               controller: controller,
             ),
-            _buildTopWidgets(),
+            BuildHomeTopWidget(
+              controller: controller,
+            ),
             Obx(
               () => AnimatedSwitcher(
                 duration: Duration(milliseconds: 300), // Animation duration
@@ -55,104 +58,4 @@ class HomeScreen extends StatelessWidget {
       ),
     );
   }
-
-  Widget _buildTopWidgets() {
-    return Align(
-      alignment: Alignment.topCenter,
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          InkWell(
-            onTap: (){
-              controller.goToMenu();
-            },
-            child: Container(
-              margin: EdgeInsets.symmetric(
-                horizontal: Get.width * .05,
-                vertical: Get.height * .04,
-              ),
-              width: Get.width * .12,
-              height: Get.width * .12,
-              decoration: BoxDecoration(
-                shape: BoxShape.circle,
-                boxShadow: shadow(),
-                color: Colors.white,
-                border: Border.all(
-                  color: Colors.white,
-                  width: 2.0,
-                ),
-              ),
-              child: Center(
-                child: SvgPicture.asset(
-                  menuIcon,
-                  height: Get.width * .06,
-                  width: Get.width * .06,
-                ),
-              ),
-            ),
-          ),
-          InkWell(
-            onTap: (){
-              Get.toNamed(NameRouts.profile);
-            },
-            child: Container(
-              margin: EdgeInsets.symmetric(
-                horizontal: Get.width * .05,
-                vertical: Get.height * .04,
-              ),
-              width: Get.width * .15,
-              height: Get.width * .15,
-              decoration: BoxDecoration(
-                shape: BoxShape.circle,
-                boxShadow: shadow(),
-                color: Colors.white,
-                border: Border.all(
-                  color: Colors.white,
-                  width: 2.0,
-                ),
-              ),
-              child: Center(
-                child: Hero(
-                  tag: 'ProfilePicture',
-                  child: StreamBuilder(
-                    stream: Blocs.infoBloc.getStream,
-                    builder: (c, x) {
-                      return Center(
-                        child: (Blocs.infoBloc.info!.nationalCardImage is String &&
-                            Blocs.infoBloc.info!.nationalCardImage!.length > 3)
-                            ? ClipRRect(
-                          borderRadius: radiusAll100,
-                          child: CachedNetworkImage(
-                            imageUrl: BaseHttpRequest.baseFileRequestUrl +
-                                '/' +
-                                Blocs.infoBloc.info!.nationalCardImage!,
-                            fit: BoxFit.cover,
-                            placeholder: (context, url) => Lottie.asset(
-                              'assets/anims/imageLoading.json',
-                            ),
-                            width: Get.width * .15,
-                            height: Get.width * .15,
-                          ),
-                        )
-                            : ClipRRect(
-                          borderRadius: radiusAll100,
-                          child: Image.asset(
-                            avatarLogo,
-                            width: Get.width * .15,
-                            height: Get.width * .15,
-                          ),
-                        ),
-                      );
-                    },
-                  ),
-                ),
-              ),
-            ),
-          ),
-        ],
-      ),
-    );
-  }
 }
-
-

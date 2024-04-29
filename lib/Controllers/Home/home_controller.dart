@@ -33,6 +33,7 @@ class HomeController extends GetxController with GetTickerProviderStateMixin {
   List<Marker> markerList = [];
 
   RxBool isFilterOn = false.obs;
+  RxBool isCollect = false.obs;
 
   List<TaskModel> taskList = [
     TaskModel(
@@ -211,5 +212,9 @@ class HomeController extends GetxController with GetTickerProviderStateMixin {
   void dispose() {
     animationController!.dispose();
     super.dispose();
+  }
+
+  void switchCollect({required bool collect}) {
+    isCollect(collect);
   }
 }
