@@ -81,10 +81,19 @@ class SplashController extends GetxController {
             apiResult['result'],
           ),
         );
-        Future.delayed(const Duration(seconds: 3), () {
-          Get.offAllNamed(NameRouts.home);
-          Get.delete<SplashController>();
-        });
+
+        if(Blocs.infoBloc.info!.status == 2){
+          StorageUtils.deleteToken();
+          Future.delayed(const Duration(seconds: 3), () {
+            Get.offAllNamed(NameRouts.intro);
+            Get.delete<SplashController>();
+          });
+        }else{
+          Future.delayed(const Duration(seconds: 3), () {
+            Get.offAllNamed(NameRouts.home);
+            Get.delete<SplashController>();
+          });
+        }
       }
     });
   }

@@ -80,9 +80,9 @@ class HomeController extends GetxController with GetTickerProviderStateMixin {
   }
 
   _getCurrentLocation() {
-    if(currentLocation is Marker){
+    if (currentLocation is Marker) {
       mapController.moveAndRotate(currentLocation!.point, 17, 3.0);
-    }else{
+    } else {
       Geolocator.getCurrentPosition(
         desiredAccuracy: LocationAccuracy.best,
         forceAndroidLocationManager: true,
@@ -163,11 +163,9 @@ class HomeController extends GetxController with GetTickerProviderStateMixin {
         Map<String, dynamic> apiResult = jsonDecode(value!.body);
 
         if (apiResult['errorCode'] == null) {
-          tempList =
-              ScooterMarkerModel.listFromJson(
-                apiResult['result'],
-              );
-
+          tempList = ScooterMarkerModel.listFromJson(
+            apiResult['result'],
+          );
 
           print('tempList.length');
           print(tempList.length);
@@ -175,19 +173,30 @@ class HomeController extends GetxController with GetTickerProviderStateMixin {
             markerList.add(
               Marker(
                 point: LatLng(o.lat.toDouble(), o.lng.toDouble()),
+                rotate: true,
                 child: (o.battery > 20)
-                    ? SvgPicture.asset(
-                        movementMarkerIcon,
+                    ? InkWell(
+                        onTap: () {
+                          print('amin 1');
+                        },
+                        child: SvgPicture.asset(
+                          movementMarkerIcon,
+                        ),
                       )
-                    : SvgPicture.asset(
-                        chargeMarkerIcon,
+                    : InkWell(
+                        onTap: () {
+                          print('amin 2');
+                        },
+                        child: SvgPicture.asset(
+                          chargeMarkerIcon,
+                        ),
                       ),
               ),
             );
           }
 
           print(markerList.length);
-          if(markerList.isNotEmpty){
+          if (markerList.isNotEmpty) {
             mapController.move(
               markerList.first.point,
               17.0,

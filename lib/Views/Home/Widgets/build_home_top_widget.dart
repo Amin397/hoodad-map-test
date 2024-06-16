@@ -1,7 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:lottie/lottie.dart';
@@ -104,6 +103,7 @@ class BuildHomeTopWidget extends StatelessWidget {
                                 borderRadius: radiusAll100,
                                 child: Image.asset(
                                   avatarLogo,
+                                  fit: BoxFit.cover,
                                   width: Get.width * .15,
                                   height: Get.width * .15,
                                 ),

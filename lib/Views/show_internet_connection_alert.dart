@@ -26,7 +26,7 @@ class ShowInternetConnectionAlert extends StatelessWidget {
             width: Get.height * .3,
           ),
           Text(
-            'Please Check Your Connection!',
+            'لطفا دسترسی خود به اینترنت را بررسی کنید',
           ),
           SizedBox(
             height: Get.height * .05,
